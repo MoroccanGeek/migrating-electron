@@ -17,6 +17,8 @@ export class NotesComponent implements OnInit {
   ngOnInit(): void {
     console.log('component initialized');
     this.appservice.getItems().subscribe((items) => (this.itemList = items));
+    // this.appservice.getItems().then(value => value.subscribe((items) => (this.itemList = items)));
+    this.appservice.sendTestLog('Honka Honka');
   }
 
   addItem(): void {

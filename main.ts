@@ -61,13 +61,23 @@ async function createWindow(): Promise<BrowserWindow> {
     win = null;
   });
 
-  ipcMain.on('get-items', async (event: any, ...args: any[]) => {
-    try {
-      event.returnValue = await itemRepo.find();
-    } catch (err) {
-      throw err;
-    }
-  });
+  ipcMain.handle('test-log', (e, log) => {
+    console.log('Logger: '+log);
+    return 'Done...'
+  })
+
+  ipcMain.handle('get-items', async (e, args) => {
+    const result = await itemRepo.find();
+    return result;
+  })
+
+  // ipcMain.on('get-items', async (event: any, ...args: any[]) => {
+  //   try {
+  //     event.returnValue = await itemRepo.find();
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // });
 
   ipcMain.on('add-item', async (event: any, _item: Item) => {
     try {

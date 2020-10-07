@@ -1,3 +1,4 @@
+import { AppService } from './services/app.service';
 import { NotesModule } from './notes/notes.module';
 import 'reflect-metadata';
 import '../polyfills';

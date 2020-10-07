@@ -1,3 +1,4 @@
+import { NotesModule } from './notes/notes.module';
 import 'reflect-metadata';
 import '../polyfills';
 
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SharedModule,
     HomeModule,
     DetailModule,
+    NotesModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       loader: {

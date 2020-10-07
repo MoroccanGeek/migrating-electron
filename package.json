@@ -94,6 +94,7 @@
     "node": ">=10.13.0"
   },
   "dependencies": {
-    "sqlite3": "5.0.0"
+    "sqlite3": "5.0.0",
+    "typeorm": "0.2.28"
   }
 }

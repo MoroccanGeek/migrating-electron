@@ -4,6 +4,7 @@ import * as url from 'url';
 import { createConnection } from 'typeorm';
 import { Item } from './src/assets/model/item.schema';
 import * as child from 'child_process';
+import { once } from 'events';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -92,24 +93,28 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   });
 
-  ipcMain.handle('py-scripts-channel', async (e: any, script) => {
+  ipcMain.handle('py-scripts-channel', async (e: any) => {
     let python = child.spawn('python', ['./src/assets/pyscripts/calc.py', '1 + 1']);
-      
-    python.stdout.on('data', data => {
-        // console.log("Python response: ", data.toString('utf8'));
-        return new Promise((reject, resolve) => {
-          resolve(data);
-        });
-    });
 
-    python.stderr.on('data', (data) => {
-      console.error(`stderr: ${data}`);
-    });
+    var xdata = '';
 
-    python.on('close', (code) => {
-      console.log(`child process exited with code ${code}`);
-    });
+    python.stdout.on('data', (data) =>{
 
+      xdata += data.toString();
+    })
+
+    await once(python, 'close');
+
+    return xdata;
+
+    /* Version 2 ==> shorturl.at/jFI06 */
+    // return new Promise((res, rej) => {
+    //   python.stdout.on('data', async (data) =>{
+
+    //       // "return" is probably wrong, what should be done instead?
+    //       res(data.toString());
+    //   })
+    // });
   });
 
   return win;

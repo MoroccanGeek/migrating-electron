@@ -40,6 +40,6 @@ export class AppService {
   }
 
   runScripts() {
-    this.electronService.ipcRenderer.invoke('py-scripts-channel').then((value) => console.log(value));
+    this.electronService.ipcRenderer.invoke('py-scripts-channel').then((value) => console.log('Data is: '+value));
   }
 }

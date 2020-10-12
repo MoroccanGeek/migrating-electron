@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as url from 'url';
 import { createConnection } from 'typeorm';
 import { Item } from './src/assets/model/item.schema';
+import * as child from 'child_process';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -71,14 +72,6 @@ async function createWindow(): Promise<BrowserWindow> {
     return result;
   })
 
-  // ipcMain.on('get-items', async (event: any, ...args: any[]) => {
-  //   try {
-  //     event.returnValue = await itemRepo.find();
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // });
-
   ipcMain.on('add-item', async (event: any, _item: Item) => {
     try {
       const item = await itemRepo.create(_item);
@@ -97,6 +90,26 @@ async function createWindow(): Promise<BrowserWindow> {
     } catch (err) {
       throw err;
     }
+  });
+
+  ipcMain.handle('py-scripts-channel', async (e: any, script) => {
+    let python = child.spawn('python', ['./src/assets/pyscripts/calc.py', '1 + 1']);
+      
+    python.stdout.on('data', data => {
+        // console.log("Python response: ", data.toString('utf8'));
+        return new Promise((reject, resolve) => {
+          resolve(data);
+        });
+    });
+
+    python.stderr.on('data', (data) => {
+      console.error(`stderr: ${data}`);
+    });
+
+    python.on('close', (code) => {
+      console.log(`child process exited with code ${code}`);
+    });
+
   });
 
   return win;

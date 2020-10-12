@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Item } from '../../assets/model/item.schema';
 import { ElectronService } from '../core/services';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,13 +27,6 @@ export class AppService {
         );
   }
 
-  // getItems(): Observable<Item[]> {
-
-  //   return of(this.electronService.ipcRenderer.sendSync('get-items')).pipe(
-  //     catchError((error: any) => throwError(error.json))
-  //   );
-  // }
-
   addItem(item: Item): Observable<Item[]> {
     return of(
       this.electronService.ipcRenderer.sendSync('add-item', item)
@@ -43,5 +37,9 @@ export class AppService {
     return of(
       this.electronService.ipcRenderer.sendSync('delete-item', item)
     ).pipe(catchError((error: any) => throwError(error.json)));
+  }
+
+  runScripts() {
+    this.electronService.ipcRenderer.invoke('py-scripts-channel').then((value) => console.log(value));
   }
 }

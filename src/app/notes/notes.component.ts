@@ -32,4 +32,8 @@ export class NotesComponent implements OnInit {
     this.appservice.deleteItem(item).subscribe((items) => (this.itemList = items));
   }
 
+  runScript() {
+    this.appservice.runScripts();
+  }
+
 }

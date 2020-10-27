@@ -2,9 +2,11 @@ import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import { createConnection } from 'typeorm';
-import { Item } from './src/assets/model/item.schema';
+// import { Item } from './src/assets/model/item.schema';
+import {Item} from './dist/assets/models/item.schema';
 import * as child from 'child_process';
 import { once } from 'events';
+import {DatabaseService} from './renderers/database/db-services'
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -12,12 +14,14 @@ const args = process.argv.slice(1),
 
 async function createWindow(): Promise<BrowserWindow> {
 
+  const db = new DatabaseService()
+
   const connection = await createConnection({
     type: 'sqlite',
     synchronize: true,
     logging: true,
     logger: 'simple-console',
-    database: './src/assets/data/database.sqlite',
+    database: './dist/assets/data/database.sqlite',
     entities: [ Item ],
   });
 
@@ -69,28 +73,15 @@ async function createWindow(): Promise<BrowserWindow> {
   })
 
   ipcMain.handle('get-items', async (e, args) => {
-    const result = await itemRepo.find();
-    return result;
+    return await db.getItems(connection);
   })
 
   ipcMain.on('add-item', async (event: any, _item: Item) => {
-    try {
-      const item = await itemRepo.create(_item);
-      await itemRepo.save(item);
-      event.returnValue = await itemRepo.find();
-    } catch (err) {
-      throw err;
-    }
+      event.returnValue = await db.addItem(connection, _item)
   });
 
   ipcMain.on('delete-item', async (event: any, _item: Item) => {
-    try {
-      const item = await itemRepo.create(_item);
-      await itemRepo.remove(item);
-      event.returnValue = await itemRepo.find();
-    } catch (err) {
-      throw err;
-    }
+    event.returnValue = await db.deleteItem(connection, _item);
   });
 
   ipcMain.handle('py-scripts-channel', async (e: any) => {

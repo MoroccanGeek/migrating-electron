@@ -7,13 +7,14 @@ import {Item} from './dist/assets/models/item.schema';
 import * as child from 'child_process';
 import { once } from 'events';
 import {DatabaseService} from './renderers/database/db-services'
+import {Settings} from './renderers/database/db-settings'
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
 async function createWindow(): Promise<BrowserWindow> {
-
+  
   const db = new DatabaseService()
 
   const connection = await createConnection({
@@ -21,7 +22,7 @@ async function createWindow(): Promise<BrowserWindow> {
     synchronize: true,
     logging: true,
     logger: 'simple-console',
-    database: './dist/assets/data/database.sqlite',
+    database: Settings.dbPath,
     entities: [ Item ],
   });
 

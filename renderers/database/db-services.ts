@@ -1,10 +1,12 @@
 import {Connection, ConnectionOptions, createConnection} from 'typeorm';
 import {Item} from '../../dist/assets/models/item.schema';
+import { Settings } from './db-settings';
 // import {Item} from '../../src/assets/model/item.schema';
 
 export class DatabaseService {
 
     constructor() {
+        Settings.initialize();
     }
 
     async getItems(connection: Connection){

@@ -37,9 +37,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var item_schema_1 = require("../../dist/assets/models/item.schema");
+var db_settings_1 = require("./db-settings");
 // import {Item} from '../../src/assets/model/item.schema';
 var DatabaseService = /** @class */ (function () {
     function DatabaseService() {
+        db_settings_1.Settings.initialize();
     }
     DatabaseService.prototype.getItems = function (connection) {
         return __awaiter(this, void 0, void 0, function () {

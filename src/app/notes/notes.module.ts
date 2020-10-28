@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NotesRoutingModule } from './notes-routing.module';
 
 import { NotesComponent } from './notes.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [NotesComponent],

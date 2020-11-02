@@ -11,6 +11,7 @@ export class NotesComponent implements OnInit {
 
   public readonly title = 'my app';
   itemList: Item[];
+  isCollapsed = true;
 
   constructor(private appservice: AppService) {}
 
@@ -35,5 +36,10 @@ export class NotesComponent implements OnInit {
   runScript() {
     this.appservice.runScripts();
   }
+
+  toggleCollapsed() {
+    this.isCollapsed = !this.isCollapsed;
+    console.log(this.isCollapsed);
+  }  
 
 }

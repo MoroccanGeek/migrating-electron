@@ -1,7 +1,7 @@
 import {Connection, ConnectionOptions, createConnection} from 'typeorm';
-import {Item} from '../../dist/assets/models/item.schema';
+// import {Item} from '../../dist/assets/models/item.schema';
 import { Settings } from './db-settings';
-// import {Item} from '../../src/assets/model/item.schema';
+import {Item} from '../../assets/models/item.schema';
 
 export class DatabaseService {
 

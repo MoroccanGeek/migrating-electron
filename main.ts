@@ -2,12 +2,12 @@ import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import { createConnection } from 'typeorm';
-// import { Item } from './src/assets/model/item.schema';
-import {Item} from './dist/assets/models/item.schema';
+
+import {Item} from './src/assets/models/item.schema';
 import * as child from 'child_process';
 import { once } from 'events';
-import {DatabaseService} from './renderers/database/db-services'
-import {Settings} from './renderers/database/db-settings'
+import {DatabaseService} from './src/renderers/database/db-services'
+import {Settings} from './src/renderers/database/db-settings'
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),

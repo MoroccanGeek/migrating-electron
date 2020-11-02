@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Item } from '@assets/model/item.schema';
+import { Item } from '@assets/models/item.schema';
 import { ElectronService } from '@core/services';
 
 

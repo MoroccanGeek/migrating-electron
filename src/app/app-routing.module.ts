@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from '@shared/components';
 
 import { HomeRoutingModule } from './modules/home/home-routing.module';
-import { NotesRoutingModule } from './notes/notes-routing.module';
 
 const routes: Routes = [
   {
@@ -20,8 +19,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    HomeRoutingModule,
-    NotesRoutingModule
+    HomeRoutingModule
   ],
   exports: [RouterModule]
 })

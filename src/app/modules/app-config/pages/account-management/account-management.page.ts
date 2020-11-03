@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '@assets/models/item.schema';
-import { AppService } from '@core/services';
+import { Item } from '../../../../../assets/models/item.schema';
+import { AppService } from '../../../../core/services';
 
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  selector: 'app-account-management',
+  templateUrl: './account-management.page.html',
+  styleUrls: ['./account-management.page.css']
 })
-export class NotesComponent implements OnInit {
+export class AccountManagementPage implements OnInit {
 
   public readonly title = 'my app';
   itemList: Item[];
@@ -17,7 +17,7 @@ export class NotesComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('component initialized');
-    this.appservice.getItems().subscribe((items) => (this.itemList = items));
+    this.appservice.getItems().subscribe((items: any) => (this.itemList = items));
     // this.appservice.getItems().then(value => value.subscribe((items) => (this.itemList = items)));
     this.appservice.sendTestLog('Honka Honka');
   }
@@ -40,6 +40,6 @@ export class NotesComponent implements OnInit {
   toggleCollapsed() {
     this.isCollapsed = !this.isCollapsed;
     console.log(this.isCollapsed);
-  }  
+  }
 
 }

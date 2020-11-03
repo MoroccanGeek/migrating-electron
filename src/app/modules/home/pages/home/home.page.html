@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <h1 class="title">
         {{ 'PAGES.HOME.TITLE' | translate }}
     </h1>
@@ -6,4 +6,29 @@
     <a routerLink="/detail">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
     <br>
     <a routerLink="/notes">Memo notes</a>
+</div> -->
+<div id="content">
+    <app-animated-app-name></app-animated-app-name>
+    
+    <div class="navigation" id="nav">
+        <div class="item scraper">
+            <!-- <a href="#" class="icon"></a> -->
+            <a routerLink="/notes" class="icon"></a>
+            <h2>Scraper</h2>
+        </div>
+        <div class="item search">
+            <a href="#" class="icon"></a>
+            <h2>Search</h2>
+        </div>
+        <div class="item trending">
+            <a href="#" class="icon"></a>
+            <h2>Trending</h2>
+        </div>
+        <div class="item config">
+            <a href="#" class="icon"></a>
+            <h2>Configuration</h2>
+        </div>
+    </div>
+
+    <app-animated-twitter-bird></app-animated-twitter-bird>
 </div>

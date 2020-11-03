@@ -5,9 +5,11 @@ import { HomeRoutingModule } from './home-routing.module';
 
 import { HomePage } from './pages/home/home.page';
 import { SharedModule } from '../../shared/shared.module';
+import { AnimatedAppNameComponent } from './components/animated-app-name/animated-app-name.component';
+import { AnimatedTwitterBirdComponent } from './components/animated-twitter-bird/animated-twitter-bird.component';
 
 @NgModule({
-  declarations: [HomePage],
+  declarations: [HomePage, AnimatedAppNameComponent, AnimatedTwitterBirdComponent],
   imports: [CommonModule, SharedModule, HomeRoutingModule]
 })
 export class HomeModule { }

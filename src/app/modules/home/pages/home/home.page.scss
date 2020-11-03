@@ -1,3 +1,69 @@
 :host {
-  
+    #content{
+        margin:0 auto;
+        background: #5ac1ff url(../../../../../assets/bg.png) no-repeat top left;
+        height: 100vh;
+    }
+
+    .navigation{
+        margin: 0px auto;
+        font-family: "Trebuchet MS", sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: bold;
+        letter-spacing: 1.4px;
+    }
+    .navigation .item{
+        position:absolute;
+    }
+    .scraper{
+       top:50px;
+       left:360px;
+    }
+    .search{
+       top:90px;
+       left:625px;
+    }
+    .trending{
+       top:230px;
+       left:835px;
+    }
+    .config{
+       top:420px;
+       left:950px;
+    }
+    a.icon{
+        width:52px;
+        height:52px;
+        position:absolute;
+        top:0px;
+        left:0px;
+        cursor:pointer;
+    }
+    .scraper a.icon{
+        background:transparent url(../../../../../assets/menu-icons/target.svg) no-repeat 0px 0px;
+    }
+    .search a.icon{
+        background:transparent url(../../../../../assets/menu-icons/search.svg) no-repeat 0px 0px;
+    }
+    .trending a.icon{
+        background:transparent url(../../../../../assets/menu-icons/trending.svg) no-repeat 0px 0px;
+    }
+    .config a.icon{
+        background:transparent url(../../../../../assets/menu-icons/config.svg) no-repeat 0px 0px;
+    }
+    
+    .item h2{
+        position:absolute;
+        width:147px;
+        height:52px;
+        color:#222;
+        font-size:18px;
+        top:0px;
+        left:52px;
+        text-indent:10px;
+        line-height:52px;
+        text-shadow:1px 1px 1px #fff;
+        text-transform:uppercase;
+    }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Item } from '@assets/models/item.schema';
+import { Account } from '@assets/models/account.entity';
 import { ElectronService } from '@core/services';
 
 
@@ -18,24 +18,24 @@ export class AppService {
     this.electronService.ipcRenderer.invoke('test-log',log).then((value) => console.log(value));
   }
 
-  getItems(){
+  getAccounts(){
 
-    const result = this.electronService.ipcRenderer.invoke('get-items');
+    const result = this.electronService.ipcRenderer.invoke('get-accounts');
 
     return from(result).pipe(
           catchError((error: any) => throwError(error.json))
         );
   }
 
-  addItem(item: Item): Observable<Item[]> {
+  addAccount(account: Account): Observable<Account[]> {
     return of(
-      this.electronService.ipcRenderer.sendSync('add-item', item)
+      this.electronService.ipcRenderer.sendSync('add-account', account)
     ).pipe(catchError((error: any) => throwError(error.json)));
   }
 
-  deleteItem(item: Item): Observable<Item[]> {
+  deleteAccount(account: Account): Observable<Account[]> {
     return of(
-      this.electronService.ipcRenderer.sendSync('delete-item', item)
+      this.electronService.ipcRenderer.sendSync('delete-account', account)
     ).pipe(catchError((error: any) => throwError(error.json)));
   }
 

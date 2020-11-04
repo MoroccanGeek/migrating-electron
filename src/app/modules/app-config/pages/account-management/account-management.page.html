@@ -1,4 +1,41 @@
-<div style="text-align:center">
+<router-outlet></router-outlet>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="text-align:center;">
+            <h3>Twitter Dev-Accounts management</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <button type="button" (click)="addNewAccount()" class="btn btn-primary btn-xs">New Dev-Account</button>
+            <br /><br />
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                        <th>Account Id</th>
+                        <th>Account Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let account of accountList">
+                            <td>{{account.id}}</td>
+                            <td>{{account.name}}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning" (click)="editAccount(account.id)">Edit</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="deleteAccount(account.id, account.name)">Edit</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div style="text-align:center">
     <h1>
         Welcome to {{ title }}!
     </h1>
@@ -37,4 +74,4 @@
             </li>
         </ul>
     </div>
-</nav>
+</nav> -->

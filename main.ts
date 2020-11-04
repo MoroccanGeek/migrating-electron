@@ -1,9 +1,9 @@
+import { Account } from './src/assets/models/account.entity';
 import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import { createConnection } from 'typeorm';
 
-import {Item} from './src/assets/models/item.schema';
 import * as child from 'child_process';
 import { once } from 'events';
 import {DatabaseService} from './src/renderers/database/db-services'
@@ -23,10 +23,10 @@ async function createWindow(): Promise<BrowserWindow> {
     logging: true,
     logger: 'simple-console',
     database: Settings.dbPath,
-    entities: [ Item ],
+    entities: [ Account ],
   });
 
-  const itemRepo = connection.getRepository(Item);
+  const accountRepo = connection.getRepository(Account);
 
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
@@ -73,16 +73,16 @@ async function createWindow(): Promise<BrowserWindow> {
     return 'Done...'
   })
 
-  ipcMain.handle('get-items', async (e, args) => {
-    return await db.getItems(connection);
+  ipcMain.handle('get-accounts', async (e, args) => {
+    return await db.getAccounts(connection);
   })
 
-  ipcMain.on('add-item', async (event: any, _item: Item) => {
-      event.returnValue = await db.addItem(connection, _item)
+  ipcMain.on('add-account', async (event: any, _account: Account) => {
+      event.returnValue = await db.addAccount(connection, _account)
   });
 
-  ipcMain.on('delete-item', async (event: any, _item: Item) => {
-    event.returnValue = await db.deleteItem(connection, _item);
+  ipcMain.on('delete-account', async (event: any, _account: Account) => {
+    event.returnValue = await db.deleteAccount(connection, _account);
   });
 
   ipcMain.handle('py-scripts-channel', async (e: any) => {

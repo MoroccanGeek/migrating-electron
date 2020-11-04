@@ -1,7 +1,6 @@
-import {Connection, ConnectionOptions, createConnection} from 'typeorm';
-// import {Item} from '../../dist/assets/models/item.schema';
+import {Connection} from 'typeorm';
 import { Settings } from './db-settings';
-import {Item} from '../../assets/models/item.schema';
+import { Account } from '../../assets/models/account.entity';
 
 export class DatabaseService {
 
@@ -9,29 +8,29 @@ export class DatabaseService {
         Settings.initialize();
     }
 
-    async getItems(connection: Connection){
+    async getAccounts(connection: Connection){
 
-        const itemRepo = connection.getRepository(Item);
-        return await itemRepo.find();
+        const accountRepo = connection.getRepository(Account);
+        return await accountRepo.find();
     }
 
-    async addItem(connection: Connection, item: Item){
+    async addAccount(connection: Connection, account: Account){
 
-        const itemRepo = connection.getRepository(Item);
+        const accountRepo = connection.getRepository(Account);
 
-        const item_result = await itemRepo.create(item);
-        await itemRepo.save(item_result);
+        const account_result = await accountRepo.create(account);
+        await accountRepo.save(account_result);
         
-        return this.getItems(connection);
+        return this.getAccounts(connection);
     }
 
-    async deleteItem(connection: Connection, item: Item){
+    async deleteAccount(connection: Connection, account: Account){
 
-        const itemRepo = connection.getRepository(Item);
+        const accountRepo = connection.getRepository(Account);
 
-        const item_result = await itemRepo.create(item);
-        await itemRepo.remove(item_result);
+        const account_result = await accountRepo.create(account);
+        await accountRepo.remove(account_result);
         
-        return this.getItems(connection);
+        return this.getAccounts(connection);
     }
 }

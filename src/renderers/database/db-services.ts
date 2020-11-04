@@ -14,6 +14,12 @@ export class DatabaseService {
         return await accountRepo.find();
     }
 
+    async getAccountById(connection: Connection, account_id: number){
+
+        const accountRepo = connection.getRepository(Account);
+        return await accountRepo.findByIds([account_id])
+    }
+
     async addAccount(connection: Connection, account: Account){
 
         const accountRepo = connection.getRepository(Account);
@@ -22,6 +28,17 @@ export class DatabaseService {
         await accountRepo.save(account_result);
         
         return this.getAccounts(connection);
+    }
+
+    async updateAccount(connection: Connection, account: Account){
+        const accountRepo = connection.getRepository(Account);
+
+        let accountToUpdate = await accountRepo.findOne(account.id);
+        
+        accountToUpdate.name = account.name;
+        accountToUpdate.in_use = account.in_use;
+
+        return await accountRepo.save(accountToUpdate);
     }
 
     async deleteAccount(connection: Connection, account: Account){

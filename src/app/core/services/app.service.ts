@@ -27,10 +27,21 @@ export class AppService {
         );
   }
 
+  getAccountById(accountId: number){
+    const result = this.electronService.ipcRenderer.invoke('get-account-by-id', accountId);
+    return from(result).pipe(
+      catchError((error: any) => throwError(error.json))
+    );
+  }
+
   addAccount(account: Account): Observable<Account[]> {
     return of(
       this.electronService.ipcRenderer.sendSync('add-account', account)
     ).pipe(catchError((error: any) => throwError(error.json)));
+  }
+
+  updateAccount(account: Account) {
+    
   }
 
   deleteAccount(account: Account): Observable<Account[]> {

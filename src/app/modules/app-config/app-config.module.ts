@@ -17,6 +17,7 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { DeleteAccountComponent } from './components/account-crud/delete-account/delete-account.component';
 import { UpdateAccountComponent } from './components/account-crud/update-account/update-account.component';
+import { EditAccountComponent } from './components/account-crud/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { UpdateAccountComponent } from './components/account-crud/update-account
     AppConfigPage,
     SidebarComponent,
     AddNewItemComponent,
+    EditAccountComponent,
     DeleteAccountComponent,
     UpdateAccountComponent
   ],

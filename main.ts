@@ -77,9 +77,17 @@ async function createWindow(): Promise<BrowserWindow> {
     return await db.getAccounts(connection);
   })
 
+  ipcMain.handle('get-account-by-id', async (e, args) => {
+    return await db.getAccountById(connection, args);
+  })
+
   ipcMain.on('add-account', async (event: any, _account: Account) => {
       event.returnValue = await db.addAccount(connection, _account)
   });
+
+  ipcMain.handle('update-account-by-id', (e, _account: Account) =>{
+    db.updateAccount(connection)
+  }) 
 
   ipcMain.on('delete-account', async (event: any, _account: Account) => {
     event.returnValue = await db.deleteAccount(connection, _account);

@@ -47,14 +47,22 @@ export class AccountManagementPage implements OnInit {
 
   editAccount(accountId: number) {
 
-    this.bsModalRef = this.bsModalService.show(EditAccountComponent);
-    this.bsModalRef.content.event.subscribe(result => {
-      if (result == 'OK') {
-        setTimeout(() => {
-          this.appservice.getAccounts().subscribe((accounts: any) => (this.accountList = accounts));
-        }, 5000);
-      }
-    });
+    this.appservice.getAccountById(accountId).subscribe(account => 
+      {
+        const initialState = {
+          tempAccount: account
+        };
+
+        this.bsModalRef = this.bsModalService.show(EditAccountComponent, {initialState});
+        this.bsModalRef.content.event.subscribe(result => {
+          if (result == 'OK') {
+            setTimeout(() => {
+              this.appservice.getAccounts().subscribe((accounts: any) => (this.accountList = accounts));
+            }, 5000);
+          }
+        });
+
+      });
   }
 
   deleteAccount(accountId: number, title: string) {

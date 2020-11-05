@@ -81,18 +81,6 @@ async function createWindow(): Promise<BrowserWindow> {
     return await db.getAccountById(connection, args);
   })
 
-<<<<<<< HEAD
-  ipcMain.on('add-account', async (event: any, _account: Account) => {
-      event.returnValue = await db.addAccount(connection, _account)
-  });
-
-  ipcMain.handle('update-account-by-id', (e, _account: Account) =>{
-    db.updateAccount(connection)
-  }) 
-
-  ipcMain.on('delete-account', async (event: any, _account: Account) => {
-    event.returnValue = await db.deleteAccount(connection, _account);
-=======
   ipcMain.handle('update-account', async (e, _account: Account) =>{
     return await db.updateAccount(connection, _account);
   })
@@ -103,7 +91,6 @@ async function createWindow(): Promise<BrowserWindow> {
 
   ipcMain.handle('add-account', async (e, _account: Account) => {
       return await db.addAccount(connection, _account);
->>>>>>> jasper
   });
 
   ipcMain.handle('py-scripts-channel', async (e: any) => {

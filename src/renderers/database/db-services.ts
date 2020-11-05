@@ -31,7 +31,7 @@ export class DatabaseService {
     }
 
     async updateAccount(connection: Connection, account: Account){
-<<<<<<< HEAD
+
         const accountRepo = connection.getRepository(Account);
 
         let accountToUpdate = await accountRepo.findOne(account.id);
@@ -39,12 +39,12 @@ export class DatabaseService {
         accountToUpdate.name = account.name;
         accountToUpdate.in_use = account.in_use;
 
-        return await accountRepo.save(accountToUpdate);
+        await accountRepo.save(accountToUpdate);
+
+        return this.getAccounts(connection);
     }
 
     async deleteAccount(connection: Connection, account: Account){
-=======
->>>>>>> jasper
 
         const accountRepo = connection.getRepository(Account);
 

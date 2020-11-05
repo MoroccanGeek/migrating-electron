@@ -39,27 +39,15 @@ export class AccountManagementPage implements OnInit {
 
   editAccount(accountId: number) {
 
-<<<<<<< HEAD
-    this.appservice.getAccountById(accountId).subscribe(account => 
-      {
-=======
     this.appservice.getAccountById(accountId).subscribe(account => {
->>>>>>> jasper
         const initialState = {
           tempAccount: account
         };
 
         this.bsModalRef = this.bsModalService.show(EditAccountComponent, {initialState});
         this.bsModalRef.content.event.subscribe(result => {
-<<<<<<< HEAD
-          if (result == 'OK') {
-            setTimeout(() => {
-              this.appservice.getAccounts().subscribe((accounts: any) => (this.accountList = accounts));
-            }, 5000);
-=======
           if (result.response == 'OK') {
             this.accountList = result.data;
->>>>>>> jasper
           }
         });
 

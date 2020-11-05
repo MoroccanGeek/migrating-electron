@@ -34,22 +34,6 @@ export class AppService {
     );
   }
 
-<<<<<<< HEAD
-  addAccount(account: Account): Observable<Account[]> {
-    return of(
-      this.electronService.ipcRenderer.sendSync('add-account', account)
-    ).pipe(catchError((error: any) => throwError(error.json)));
-  }
-
-  updateAccount(account: Account) {
-    
-  }
-
-  deleteAccount(account: Account): Observable<Account[]> {
-    return of(
-      this.electronService.ipcRenderer.sendSync('delete-account', account)
-    ).pipe(catchError((error: any) => throwError(error.json)));
-=======
   addAccount(account: Account) {
     const result = this.electronService.ipcRenderer.invoke('add-account', account);
 
@@ -70,7 +54,6 @@ export class AppService {
     return from(result).pipe(
       catchError((error: any) => throwError(error.json))
     );
->>>>>>> jasper
   }
 
   runScripts() {

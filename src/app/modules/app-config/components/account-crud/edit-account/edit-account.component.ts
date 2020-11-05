@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
+=======
+import { Component, OnInit, EventEmitter } from '@angular/core';
+>>>>>>> jasper
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Account } from '@assets/models/account.entity';
 import { AppService } from '@core/services/app.service';
@@ -26,6 +30,25 @@ export class EditAccountComponent implements OnInit {
 
   onAccountEditFormSubmit() {
 
+<<<<<<< HEAD
+=======
+    let tempAccount = new Account();
+    tempAccount.id = this.tempAccount[0].id;
+    tempAccount.name = this.editAccountForm.get('account_name').value;
+    tempAccount.in_use = this.tempAccount[0].in_use;
+
+    this.appservice.updateAccount(tempAccount).subscribe( accounts => {
+
+      if(accounts!=null && accounts.length>0){
+        let response = {
+          'response': 'OK',
+          'data': accounts
+        }
+        this.event.emit(response);
+        this.bsModalRef.hide();
+      }
+    });
+>>>>>>> jasper
   }
 
   onClose(){

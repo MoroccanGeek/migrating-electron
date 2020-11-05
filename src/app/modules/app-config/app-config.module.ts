@@ -6,7 +6,6 @@ import { AppConfigRoutingModule } from './app-config-routing.module';
 import { AccountManagementPage } from './pages/account-management/account-management.page';
 import { SharedModule } from '../../shared/shared.module';
 
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AppConfigPage } from './pages/app-config/app-config.page';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AddNewItemComponent } from './components/account-crud/add-new-account/add-new-account.component';
@@ -33,7 +32,6 @@ import { EditAccountComponent } from './components/account-crud/edit-account/edi
     CommonModule,
     AppConfigRoutingModule,
     SharedModule,
-    CollapseModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

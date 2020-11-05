@@ -6,7 +6,6 @@ import { AppConfigRoutingModule } from './app-config-routing.module';
 import { AccountManagementPage } from './pages/account-management/account-management.page';
 import { SharedModule } from '../../shared/shared.module';
 
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AppConfigPage } from './pages/app-config/app-config.page';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AddNewItemComponent } from './components/account-crud/add-new-account/add-new-account.component';
@@ -17,6 +16,7 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { DeleteAccountComponent } from './components/account-crud/delete-account/delete-account.component';
 import { UpdateAccountComponent } from './components/account-crud/update-account/update-account.component';
+import { EditAccountComponent } from './components/account-crud/edit-account/edit-account.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { UpdateAccountComponent } from './components/account-crud/update-account
     AppConfigPage,
     SidebarComponent,
     AddNewItemComponent,
+    EditAccountComponent,
     DeleteAccountComponent,
     UpdateAccountComponent
   ],
@@ -31,7 +32,6 @@ import { UpdateAccountComponent } from './components/account-crud/update-account
     CommonModule,
     AppConfigRoutingModule,
     SharedModule,
-    CollapseModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,

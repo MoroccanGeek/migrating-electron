@@ -77,12 +77,20 @@ async function createWindow(): Promise<BrowserWindow> {
     return await db.getAccounts(connection);
   })
 
-  ipcMain.on('add-account', async (event: any, _account: Account) => {
-      event.returnValue = await db.addAccount(connection, _account)
-  });
+  ipcMain.handle('get-account-by-id', async (e, args) => {
+    return await db.getAccountById(connection, args);
+  })
 
-  ipcMain.on('delete-account', async (event: any, _account: Account) => {
-    event.returnValue = await db.deleteAccount(connection, _account);
+  ipcMain.handle('update-account', async (e, _account: Account) =>{
+    return await db.updateAccount(connection, _account);
+  })
+
+  ipcMain.handle('delete-account-by-id', async (e, account_id: number) =>{
+    return await db.deleteAccountById(connection, account_id);
+  }) 
+
+  ipcMain.handle('add-account', async (e, _account: Account) => {
+      return await db.addAccount(connection, _account);
   });
 
   ipcMain.handle('py-scripts-channel', async (e: any) => {

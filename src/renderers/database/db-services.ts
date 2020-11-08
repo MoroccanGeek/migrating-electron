@@ -1,6 +1,7 @@
 import {Connection} from 'typeorm';
 import { Settings } from './db-settings';
 import { Account } from '../../assets/models/account.entity';
+import { Apikey } from '../../assets/models/apikey.entity';
 
 export class DatabaseService {
 
@@ -8,6 +9,7 @@ export class DatabaseService {
         Settings.initialize();
     }
 
+// For Accounts CRUD
     async getAccounts(connection: Connection){
 
         const accountRepo = connection.getRepository(Account);
@@ -67,5 +69,22 @@ export class DatabaseService {
         await accountRepo.remove(account_result);
         
         return this.getAccounts(connection);
+    }
+
+// For API Keys CRUD
+    async getApikeys(connection: Connection){
+
+        const apikeyRepo = connection.getRepository(Apikey);
+        return await apikeyRepo.find();
+    }
+
+    async addApikey(connection: Connection, apikey: Apikey){
+
+        const apikeyRepo = connection.getRepository(Apikey);
+
+        const apikey_result = await apikeyRepo.create(apikey);
+        await apikeyRepo.save(apikey_result);
+        
+        return this.getApikeys(connection);
     }
 }

@@ -30,7 +30,6 @@ export class AddNewItemComponent implements OnInit {
     account_temp.in_use = this.addNewAccountForm.get('in_use').value;
 
     this.appservice.addAccount(account_temp).subscribe((accounts) => {
-      console.log(accounts);
       
       if(accounts!=null && accounts.length>0){
         let response = {

@@ -1,0 +1,45 @@
+<router-outlet></router-outlet>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="text-align:center;">
+            <h3>Twitter API Keys management</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <button type="button" (click)="addNewApiKey()" class="btn btn-primary btn-xs">New API key</button>
+            <br /><br />
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                        <th>ID</th>
+                        <th>Key</th>
+                        <th>Secret Key</th>
+                        <th>Access Token</th>
+                        <th>Access Secret</th>
+                        <th>BearerToken</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let apikey of apiKeyList">
+                            <td>{{apikey.id}}</td>
+                            <td>{{apikey.key}}</td>
+                            <td>{{apikey.secret_key}}</td>
+                            <td>{{apikey.access_token}}</td>
+                            <td>{{apikey.access_secret}}</td>
+                            <td>{{apikey.bearer_token}}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning" (click)="updateApiKey(apikey.id)">Edit</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="deleteApiKey(apikey.id)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

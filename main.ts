@@ -1,4 +1,5 @@
 import { Account } from './src/assets/models/account.entity';
+import { Apikey } from './src/assets/models/apikey.entity';
 import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
@@ -23,7 +24,7 @@ async function createWindow(): Promise<BrowserWindow> {
     logging: true,
     logger: 'simple-console',
     database: Settings.dbPath,
-    entities: [ Account ],
+    entities: [ Account, Apikey ],
   });
 
   const accountRepo = connection.getRepository(Account);
@@ -73,6 +74,7 @@ async function createWindow(): Promise<BrowserWindow> {
     return 'Done...'
   })
 
+// For Accounts CRUD
   ipcMain.handle('get-accounts', async (e, args) => {
     return await db.getAccounts(connection);
   })
@@ -92,6 +94,16 @@ async function createWindow(): Promise<BrowserWindow> {
   ipcMain.handle('add-account', async (e, _account: Account) => {
       return await db.addAccount(connection, _account);
   });
+
+// For API Keys CRUD
+  ipcMain.handle('get-apikeys', async (e, args) => {
+    return await db.getApikeys(connection);
+  })
+
+  ipcMain.handle('add-apikey', async(e, _apikey: Apikey) => {
+    return await db.addApikey(connection, _apikey);
+  })
+
 
   ipcMain.handle('py-scripts-channel', async (e: any) => {
     let python = child.spawn('python', ['./src/assets/pyscripts/calc.py', '1 + 1']);

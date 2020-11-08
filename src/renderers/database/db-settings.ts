@@ -16,8 +16,6 @@ export class Settings {
     }
 
     private static setPaths() {
-        // console.log('>>>>> Application Path is: ',app.getAppPath())
-        // console.log('>>>>> Application Path after production is: ',app.getPath('userData'))
 
         if(AppConfig.production){
             this.dataSubFolder = '/';
@@ -30,7 +28,6 @@ export class Settings {
 
         Settings.dbFolder = path.join(Settings.appPath, Settings.dataSubFolder);
         
-        // Settings.dbFolder = path.join(__dirname, '../../dist/assets/data')
         Settings.dbPath = path.join(Settings.dbFolder, this.dbName)
     }
 }

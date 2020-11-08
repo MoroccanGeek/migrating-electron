@@ -17,7 +17,10 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { DeleteAccountComponent } from './components/account-crud/delete-account/delete-account.component';
 import { UpdateAccountComponent } from './components/account-crud/update-account/update-account.component';
 import { EditAccountComponent } from './components/account-crud/edit-account/edit-account.component';
-import { ApiKeysManagementPage } from './pages/api-keys-management/api-keys-management/api-keys-management.page';
+import { ApiKeysManagementPage } from './pages/api-keys-management/api-keys-management.page';
+import { AddNewApiKeyComponent } from './components/api-keys-crud/add-new-api-key/add-new-api-key.component';
+import { DeleteApiKeyComponent } from './components/api-keys-crud/delete-api-key/delete-api-key.component';
+import { UpdateApiKeyComponent } from './components/api-keys-crud/update-api-key/update-api-key.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ApiKeysManagementPage } from './pages/api-keys-management/api-keys-mana
     EditAccountComponent,
     DeleteAccountComponent,
     UpdateAccountComponent,
-    ApiKeysManagementPage
+    ApiKeysManagementPage,
+    AddNewApiKeyComponent,
+    DeleteApiKeyComponent,
+    UpdateApiKeyComponent
   ],
   imports: [
     CommonModule,

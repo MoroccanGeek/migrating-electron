@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
+import { Apikey } from './apikey.entity';
 
 @Entity()
 export class Account
@@ -11,4 +12,7 @@ export class Account
 
     @Column()
     in_use: string;
+
+    @OneToMany(() => Apikey, apikey => apikey.account)
+    apikeys: Apikey[];
 }

@@ -112,6 +112,10 @@ async function createWindow(): Promise<BrowserWindow> {
     return await db.updateApikey(connection, _apikey);
   })
 
+  ipcMain.handle('delete-apikey-by-id', async (e, apikey_id: number) => {
+    return await db.deleteApikeyById(connection, apikey_id);
+  })
+
 
   ipcMain.handle('py-scripts-channel', async (e: any) => {
     let python = child.spawn('python', ['./src/assets/pyscripts/calc.py', '1 + 1']);

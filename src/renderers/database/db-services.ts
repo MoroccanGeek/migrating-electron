@@ -109,4 +109,11 @@ export class DatabaseService {
 
         return this.getApikeys(connection);
     }
+
+    async deleteApikeyById(connection: Connection, apikey_id: number){
+        const apikeyRepo = connection.getRepository(Apikey);
+        const apikeyToDelete = await apikeyRepo.findOne(apikey_id);
+        await apikeyRepo.remove(apikeyToDelete);
+        return this.getApikeys(connection);
+    }
 }

@@ -1,3 +1,4 @@
+import { DeleteApiKeyComponent } from './../../components/api-keys-crud/delete-api-key/delete-api-key.component';
 import { UpdateApiKeyComponent } from './../../components/api-keys-crud/update-api-key/update-api-key.component';
 import { AddNewApiKeyComponent } from './../../components/api-keys-crud/add-new-api-key/add-new-api-key.component';
 import { Component, OnInit } from '@angular/core';
@@ -54,6 +55,17 @@ export class ApiKeysManagementPage implements OnInit {
   }
 
   deleteApiKey(apikeyId: number): void {
+
+    const initialState = {
+      apikey_id: apikeyId
+    };
+
+    this.bsModalRef = this.bsModalService.show(DeleteApiKeyComponent, {initialState});
+      this.bsModalRef.content.event.subscribe(result => {
+        if (result.response == 'OK') {
+          this.apiKeyList = result.data;
+        }
+      });
 
   }
 

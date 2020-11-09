@@ -45,9 +45,7 @@ export class AddNewApiKeyComponent implements OnInit {
     temp_apikey.access_secret = this.addNewApiKeyForm.get('access_secret').value;
     temp_apikey.bearer_token = this.addNewApiKeyForm.get('bearer_token').value;
     temp_apikey.in_use = 0;
-    temp_apikey.account_id = this.addNewApiKeyForm.get('accounts').value;
-
-    // console.log(temp_apikey);
+    temp_apikey.account = this.addNewApiKeyForm.get('accounts').value;
 
     this.apikeyService.addApiKey(temp_apikey).subscribe( apikeys => {
       

@@ -25,10 +25,10 @@ export class Apikey
     @Column()
     in_use: number;
 
-    @Column()
-    account_id: number;
+    // @Column()
+    // account_id: number;
 
-    @ManyToOne(() => Account, account => account.apikeys)
+    @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE' })
     @JoinColumn({ name: "account_id" })
     account: Account;
 }

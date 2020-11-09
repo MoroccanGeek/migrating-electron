@@ -37,9 +37,8 @@ export class DatabaseService {
         const accountRepo = connection.getRepository(Account);
 
         let accountToUpdate = await accountRepo.findOne(account.id);
-        
-        accountToUpdate.name = account.name;
-        accountToUpdate.in_use = account.in_use;
+
+        accountToUpdate = account;
 
         await accountRepo.save(accountToUpdate);
 

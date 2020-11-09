@@ -77,6 +77,11 @@ export class DatabaseService {
         return await apikeyRepo.find();
     }
 
+    async getApikeyById(connection: Connection, apikey_id: number){
+        const apikeyRepo = connection.getRepository(Apikey);
+        return await apikeyRepo.findByIds([apikey_id], { relations: ["account"] });
+    }
+
     async addApikey(connection: Connection, apikey: Apikey){
 
         const apikeyRepo = connection.getRepository(Apikey);
@@ -84,6 +89,24 @@ export class DatabaseService {
         const apikey_result = await apikeyRepo.create(apikey);
         await apikeyRepo.save(apikey_result);
         
+        return this.getApikeys(connection);
+    }
+
+    async updateApikey(connection: Connection, apikey: Apikey){
+
+        const apikeyRepo = connection.getRepository(Apikey);
+
+        let apikeyToUpdate = await apikeyRepo.findOne(apikey.id);
+
+        apikeyToUpdate.key = apikey.key;
+        apikeyToUpdate.secret_key = apikey.secret_key;
+        apikeyToUpdate.access_token = apikey.access_token;
+        apikeyToUpdate.access_secret = apikey.access_secret;
+        apikeyToUpdate.bearer_token = apikey.bearer_token;
+        apikeyToUpdate.account = apikey.account;
+        
+        await apikeyRepo.save(apikeyToUpdate);
+
         return this.getApikeys(connection);
     }
 }

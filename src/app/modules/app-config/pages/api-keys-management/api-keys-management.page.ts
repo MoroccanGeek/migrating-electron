@@ -1,7 +1,8 @@
+import { UpdateApiKeyComponent } from './../../components/api-keys-crud/update-api-key/update-api-key.component';
 import { AddNewApiKeyComponent } from './../../components/api-keys-crud/add-new-api-key/add-new-api-key.component';
 import { Component, OnInit } from '@angular/core';
 import { ApikeyService } from '@core/services/repository/apikey.service';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Apikey } from '@assets/models/apikey.entity';
 
 @Component({
@@ -32,6 +33,23 @@ export class ApiKeysManagementPage implements OnInit {
   }
 
   updateApiKey(apikeyId: number): void {
+
+    this.apikeyService.getApikeyById(apikeyId).subscribe((apikey :Apikey) => {
+
+      const modalOptions: ModalOptions = {
+        initialState: {
+          tempApikey: apikey
+        },
+        class: "modal-lg"
+      }
+
+      this.bsModalRef = this.bsModalService.show(UpdateApiKeyComponent, modalOptions);
+      this.bsModalRef.content.event.subscribe(result => {
+        if (result.response == 'OK') {
+          this.apiKeyList = result.data;
+        }
+      });
+    });
 
   }
 

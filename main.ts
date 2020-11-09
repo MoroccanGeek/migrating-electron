@@ -100,8 +100,16 @@ async function createWindow(): Promise<BrowserWindow> {
     return await db.getApikeys(connection);
   })
 
+  ipcMain.handle('get-apikey-by-id', async (e, args) => {
+    return await db.getApikeyById(connection, args);
+  })
+
   ipcMain.handle('add-apikey', async(e, _apikey: Apikey) => {
     return await db.addApikey(connection, _apikey);
+  })
+
+  ipcMain.handle('update-apikey', async(e, _apikey: Apikey) => {
+    return await db.updateApikey(connection, _apikey);
   })
 
 

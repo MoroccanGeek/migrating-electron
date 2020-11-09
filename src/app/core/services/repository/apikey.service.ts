@@ -14,16 +14,22 @@ export class ApikeyService {
   constructor(private electronService: ElectronService) { }
 
   getApiKeys() {
-
     const result = this.electronService.ipcRenderer.invoke('get-apikeys');
+    return from(result).pipe(catchError((error: any) => throwError(error.json)));
+  }
 
-    return from(result).pipe(
-          catchError((error: any) => throwError(error.json))
-        );
+  getApikeyById(apikeyId: number) {
+    const result = this.electronService.ipcRenderer.invoke('get-apikey-by-id', apikeyId);
+    return from(result).pipe(catchError((error: any) => throwError(error.json)));
   }
 
   addApiKey(apikey: Apikey) {
     const result  = this.electronService.ipcRenderer.invoke('add-apikey',apikey);
+    return from(result).pipe(catchError((error: any) => throwError(error.json)));
+  }
+
+  updateApikey(apikey: Apikey) {
+    const result = this.electronService.ipcRenderer.invoke('update-apikey', apikey);
     return from(result).pipe(catchError((error: any) => throwError(error.json)));
   }
 }

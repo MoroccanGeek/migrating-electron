@@ -28,10 +28,14 @@ export class AddNewApiKeyComponent implements OnInit {
       access_secret: new FormControl('', []),
       bearer_token: new FormControl('', []),
     });
+    
 
-    this.addNewApiKeyForm.get('accounts').setValue('xxxx', {onlySelf: true});
+    this.appService.getAccounts().subscribe((accounts: any) => {
+      this.accountsList = accounts;
 
-    this.appService.getAccounts().subscribe((accounts: any) => (this.accountsList = accounts));
+      this.addNewApiKeyForm.controls['accounts'].setValue(this.accountsList[0].id,{onlySelf: true});
+    
+    });
 
   }
 

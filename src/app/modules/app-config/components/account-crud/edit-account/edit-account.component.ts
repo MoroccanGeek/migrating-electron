@@ -32,8 +32,6 @@ export class EditAccountComponent implements OnInit {
     tempAccount.in_use = this.tempAccount[0].in_use;
 
     this.appservice.updateAccount(tempAccount).subscribe( accounts => {
-
-      console.log('>>>>> Accounts are :',accounts);
       
       if(accounts!=null && accounts.length>0){
         let response = {

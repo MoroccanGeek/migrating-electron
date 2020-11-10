@@ -21,6 +21,11 @@ import { AddNewApiKeyComponent } from './components/api-keys-crud/add-new-api-ke
 import { DeleteApiKeyComponent } from './components/api-keys-crud/delete-api-key/delete-api-key.component';
 import { UpdateApiKeyComponent } from './components/api-keys-crud/update-api-key/update-api-key.component';
 
+import { ProjectManagementPage } from './pages/project-management/project-management.page';
+import { AddNewProjectComponent } from './components/projects-crud/add-new-project/add-new-project.component';
+import { UpdateProjectComponent } from './components/projects-crud/update-project/update-project.component';
+import { DeleteProjectComponent } from './components/projects-crud/delete-project/delete-project.component';
+
 @NgModule({
   declarations: [
     AccountManagementPage,
@@ -32,7 +37,11 @@ import { UpdateApiKeyComponent } from './components/api-keys-crud/update-api-key
     ApiKeysManagementPage,
     AddNewApiKeyComponent,
     DeleteApiKeyComponent,
-    UpdateApiKeyComponent
+    UpdateApiKeyComponent,
+    ProjectManagementPage,
+    AddNewProjectComponent,
+    UpdateProjectComponent,
+    DeleteProjectComponent
   ],
   imports: [
     CommonModule,

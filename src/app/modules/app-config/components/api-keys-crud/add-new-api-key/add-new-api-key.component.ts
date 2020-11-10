@@ -4,7 +4,8 @@ import { Apikey } from '@assets/models/apikey.entity';
 import { Account } from '@assets/models/account.entity';
 import { ApikeyService } from '@core/services/repository/apikey.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { AccountService } from '@core/services';
+import { AccountService, ProjectService } from '@core/services';
+import { Project } from '@assets/models/project.entity';
 
 @Component({
   selector: 'app-add-new-api-key',
@@ -14,14 +15,21 @@ import { AccountService } from '@core/services';
 export class AddNewApiKeyComponent implements OnInit {
 
   addNewApiKeyForm: FormGroup;
-  event: EventEmitter<any>=new EventEmitter();
+  event: EventEmitter<any> =new EventEmitter();
   accountsList: Account[];
+  projectsList: Project[];
 
-  constructor(private builder: FormBuilder, private accountService:AccountService, private apikeyService: ApikeyService, private bsModalRef: BsModalRef) { }
+  constructor(
+    private builder: FormBuilder, 
+    private accountService:AccountService, 
+    private apikeyService: ApikeyService,
+    private projectService: ProjectService,
+    private bsModalRef: BsModalRef) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.addNewApiKeyForm = this.builder.group({
       accounts: new FormControl('', []),
+      projects: new FormControl('', []),
       key: new FormControl('', []),
       secret_key: new FormControl('', []),
       access_token: new FormControl('', []),
@@ -29,12 +37,21 @@ export class AddNewApiKeyComponent implements OnInit {
       bearer_token: new FormControl('', []),
     });
     
+    let accounts = await this.accountService.getAccounts().toPromise();
+    this.accountsList = accounts;
 
-    this.accountService.getAccounts().subscribe((accounts: any) => {
-      this.accountsList = accounts;
+    const defaultSelectedAccount = this.accountsList[0];
+    this.addNewApiKeyForm.controls['accounts'].setValue(defaultSelectedAccount.id,{onlySelf: true});
 
-      this.addNewApiKeyForm.controls['accounts'].setValue(this.accountsList[0].id,{onlySelf: true});
-    
+    this.projectService.getProjectsByAccounId(defaultSelectedAccount.id).subscribe((projects: any) => {
+      this.projectsList = projects;
+
+      const noProject = new Project()
+      noProject.id = null;
+      noProject.name = "No Project";
+      this.projectsList.unshift(noProject);
+
+      this.addNewApiKeyForm.controls['projects'].setValue(this.projectsList[0].id,{onlySelf: true});
     });
 
   }
@@ -50,6 +67,7 @@ export class AddNewApiKeyComponent implements OnInit {
     temp_apikey.bearer_token = this.addNewApiKeyForm.get('bearer_token').value;
     temp_apikey.in_use = 0;
     temp_apikey.account = this.addNewApiKeyForm.get('accounts').value;
+    temp_apikey.project = this.addNewApiKeyForm.get('projects').value;
 
     this.apikeyService.addApiKey(temp_apikey).subscribe( apikeys => {
       
@@ -64,6 +82,23 @@ export class AddNewApiKeyComponent implements OnInit {
     
     });
 
+  }
+
+  changeProjects(e: any){
+    const selectedAccountIndex = e.target.selectedIndex;
+
+    const selectedAccountId = this.accountsList[selectedAccountIndex].id;
+
+    this.projectService.getProjectsByAccounId(selectedAccountId).subscribe((projects: any) => {
+      this.projectsList = projects;
+      
+      const noProject = new Project()
+      noProject.id = null;
+      noProject.name = "No Project";
+      this.projectsList.unshift(noProject);
+
+      this.addNewApiKeyForm.controls['projects'].setValue(this.projectsList[0].id,{onlySelf: true});
+    });
   }
 
   onClose(){

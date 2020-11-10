@@ -20,7 +20,7 @@ export class DeleteAccountComponent implements OnInit {
   }
 
   deleteAccount() {
-    this.accountService.deleteAccountById(this.tempAccount[0].id).subscribe( accounts => {
+    this.accountService.deleteAccountById(this.tempAccount.id).subscribe( accounts => {
 
       if(accounts!=null){
         let response = {

@@ -19,7 +19,11 @@ export class ApiKeysManagementPage implements OnInit {
   constructor(private apikeyService: ApikeyService, private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
-    this.apikeyService.getApiKeys().subscribe((apikeys: any) => (this.apiKeyList = apikeys));
+    this.apikeyService.getApiKeys().subscribe((apikeys: any) => {
+      this.apiKeyList = apikeys;
+
+      console.log(this.apiKeyList);
+    });
   }
 
   addNewApiKey(): void {

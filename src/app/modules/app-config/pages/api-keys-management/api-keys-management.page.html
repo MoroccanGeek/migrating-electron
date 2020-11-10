@@ -16,6 +16,7 @@
                         <th>ID</th>
                         <th>Key</th>
                         <th>Account</th>
+                        <th>Project</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </thead>
@@ -24,6 +25,8 @@
                             <td>{{apikey.id}}</td>
                             <td>{{apikey.key}}</td>
                             <td>{{apikey.account.name}}</td>
+                            <td *ngIf="apikey.project != null">{{apikey.project.name}}</td>
+                            <td *ngIf="apikey.project == null">NULL</td>
                             <td>
                                 <button type="button" class="btn btn-warning" (click)="updateApiKey(apikey.id)">Edit</button>
                             </td>

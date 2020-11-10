@@ -40,7 +40,7 @@ export class UpdateProjectComponent implements OnInit {
     this.tempProject.name = this.UpdateProjectForm.get('name').value;
 
     this.accountService.getAccountById(this.UpdateProjectForm.get('accounts').value).subscribe(account => {
-      this.tempProject.account = account[0];
+      this.tempProject.account = account;
 
       this.projectService.updateProject(this.tempProject).subscribe( projects => {
       

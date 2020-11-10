@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Account } from '@assets/models/account.entity';
 import { AccountService } from '@core/services';
-import { AppService } from '@core/services/app.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -21,16 +20,16 @@ export class EditAccountComponent implements OnInit {
   ngOnInit(): void {
 
     this.editAccountForm = this.builder.group({
-      account_name: new FormControl(this.tempAccount[0].name, []),
+      account_name: new FormControl(this.tempAccount.name, []),
     });
   }
 
   onAccountEditFormSubmit() {
 
     let tempAccount = new Account();
-    tempAccount.id = this.tempAccount[0].id;
+    tempAccount.id = this.tempAccount.id;
     tempAccount.name = this.editAccountForm.get('account_name').value;
-    tempAccount.in_use = this.tempAccount[0].in_use;
+    tempAccount.in_use = this.tempAccount.in_use;
 
     this.accountService.updateAccount(tempAccount).subscribe( accounts => {
       

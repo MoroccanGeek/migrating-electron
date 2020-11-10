@@ -20,7 +20,7 @@ export class DatabaseService {
     async getAccountById(connection: Connection, account_id: number){
 
         const accountRepo = connection.getRepository(Account);
-        return await accountRepo.findByIds([account_id])
+        return await accountRepo.findOne(account_id);
     }
 
     async addAccount(connection: Connection, account: Account){
@@ -122,6 +122,15 @@ export class DatabaseService {
     async getProjects(connection: Connection) {
         const projectRepo = connection.getRepository(Project);
         return await projectRepo.find();
+    }
+
+    async getProjectsByAccountId(connection: Connection, accountId: number) {
+        // Get Account By Id
+        let theAccount: Account = await this.getAccountById(connection, accountId);
+
+        const projectRepo = connection.getRepository(Project);
+
+        return await projectRepo.find({account: theAccount});
     }
 
     async getProjectById(connection: Connection, project_id: number) {

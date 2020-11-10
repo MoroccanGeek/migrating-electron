@@ -122,6 +122,10 @@ ipcMain.handle('get-projects', async (e, args) => {
   return await db.getProjects(connection);
 })
 
+ipcMain.handle('get-projects-by-account-id', async (e, accountId: number) => {
+  return await db.getProjectsByAccountId(connection, accountId);
+})
+
 ipcMain.handle('get-project-by-id', async (e, args) => {
   return await db.getProjectById(connection, args);
 })

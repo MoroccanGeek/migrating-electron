@@ -18,6 +18,11 @@ export class ProjectService {
     return from(result).pipe(catchError((error: any) => throwError(error.json)));
   }
 
+  getProjectsByAccounId(accountId: number){
+    const result = this.electronService.ipcRenderer.invoke('get-projects-by-account-id', accountId);
+    return from(result).pipe(catchError((error: any) => throwError(error.json)));
+  }
+
   getProjectById(projectId: number){
     const result = this.electronService.ipcRenderer.invoke('get-project-by-id', projectId);
     return from(result).pipe(catchError((error: any) => throwError(error.json)));

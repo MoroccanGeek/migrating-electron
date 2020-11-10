@@ -11,7 +11,7 @@ export class Project {
     @Column()
     name: string;
 
-    @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE',eager: true })
+    @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE',eager: true, nullable: false })
     @JoinColumn({ name: "account_id" })
     account: Account;
 

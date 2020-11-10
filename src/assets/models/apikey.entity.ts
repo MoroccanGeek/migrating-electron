@@ -27,7 +27,7 @@ export class Apikey
     in_use: number;
 
     // This column can not be NULL
-    @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE',eager: true })
+    @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE',eager: true, nullable: false })
     @JoinColumn({ name: "account_id" })
     account: Account;
 

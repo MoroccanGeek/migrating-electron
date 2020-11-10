@@ -33,7 +33,7 @@ export class ProjectService {
     return from(result).pipe(catchError((error: any) => throwError(error.json)));
   }
 
-  deleteProjectById(project_id: Project){
+  deleteProjectById(project_id: number){
     const result = this.electronService.ipcRenderer.invoke('delete-project-by-id',project_id);
     return from(result).pipe(catchError((error: any) => throwError(error.json)));
   }

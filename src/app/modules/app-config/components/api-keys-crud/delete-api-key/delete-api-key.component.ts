@@ -18,7 +18,7 @@ export class DeleteApiKeyComponent implements OnInit {
   }
 
   deleteApikey() {
-    this.apikeyService.deleteApikey(this.apikey_id).subscribe( remaining_apikeys => {
+    this.apikeyService.deleteApikeyById(this.apikey_id).subscribe( remaining_apikeys => {
       if(remaining_apikeys!=null){
         let response = {
           'response': 'OK',

@@ -1,1 +1,37 @@
-<p>project-management works!</p>
+<router-outlet></router-outlet>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="text-align:center;">
+            <h3>Projects management</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <button type="button" (click)="addNewProject()" class="btn btn-primary btn-xs">New Project</button>
+            <br /><br />
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                        <th><i class="fas fa-project-diagram"></i> Id</th>
+                        <th>Project Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let project of projectList">
+                            <td>{{project.id}}</td>
+                            <td>{{project.name}}</td>
+                            <td>
+                                <button type="button" class="btn btn-warning" (click)="updateProject(project.id)">Edit</button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" (click)="deleteProject(project.id)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

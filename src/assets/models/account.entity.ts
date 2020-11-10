@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm';
 import { Apikey } from './apikey.entity';
+import { Project } from './project.entity';
 
 @Entity()
 export class Account
@@ -15,4 +16,7 @@ export class Account
 
     @OneToMany(() => Apikey, apikey => apikey.account)
     apikeys: Apikey[];
+
+    @OneToMany(() => Project, project => project.account)
+    projects: Project[];
 }

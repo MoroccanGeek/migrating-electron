@@ -1,5 +1,6 @@
 import { Account } from './src/assets/models/account.entity';
 import { Apikey } from './src/assets/models/apikey.entity';
+import { Project } from './src/assets/models/project.entity';
 import { app, BrowserWindow, ipcMain, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
@@ -24,7 +25,7 @@ async function createWindow(): Promise<BrowserWindow> {
     logging: true,
     logger: 'simple-console',
     database: Settings.dbPath,
-    entities: [ Account, Apikey ],
+    entities: [ Account, Apikey, Project ],
   });
 
   const accountRepo = connection.getRepository(Account);
@@ -115,6 +116,27 @@ async function createWindow(): Promise<BrowserWindow> {
   ipcMain.handle('delete-apikey-by-id', async (e, apikey_id: number) => {
     return await db.deleteApikeyById(connection, apikey_id);
   })
+
+// For Projects CRUD
+ipcMain.handle('get-projects', async (e, args) => {
+  return await db.getProjects(connection);
+})
+
+ipcMain.handle('get-project-by-id', async (e, args) => {
+  return await db.getProjectById(connection, args);
+})
+
+ipcMain.handle('add-project', async(e, _project: Project) => {
+  return await db.addProject(connection, _project);
+})
+
+ipcMain.handle('update-project', async(e, _project: Project) => {
+  return await db.updateProject(connection, _project);
+})
+
+ipcMain.handle('delete-project-by-id', async (e, project_id: number) => {
+  return await db.deleteProjectById(connection, project_id);
+})
 
 
   ipcMain.handle('py-scripts-channel', async (e: any) => {

@@ -25,9 +25,6 @@ export class Apikey
     @Column()
     in_use: number;
 
-    // @Column()
-    // account_id: number;
-
     @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE',eager: true })
     @JoinColumn({ name: "account_id" })
     account: Account;

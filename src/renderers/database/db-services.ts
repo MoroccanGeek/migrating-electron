@@ -2,6 +2,7 @@ import {Connection} from 'typeorm';
 import { Settings } from './db-settings';
 import { Account } from '../../assets/models/account.entity';
 import { Apikey } from '../../assets/models/apikey.entity';
+import { Project } from '../../assets/models/project.entity';
 
 export class DatabaseService {
 
@@ -115,5 +116,45 @@ export class DatabaseService {
         const apikeyToDelete = await apikeyRepo.findOne(apikey_id);
         await apikeyRepo.remove(apikeyToDelete);
         return this.getApikeys(connection);
+    }
+
+// For Projects CRUD
+    async getProjects(connection: Connection) {
+        const projectRepo = connection.getRepository(Project);
+        return await projectRepo.find();
+    }
+
+    async getProjectById(connection: Connection, project_id: number) {
+        const projectRepo = connection.getRepository(Project);
+        return await projectRepo.findOne(project_id,  { relations: ["account"] });
+    }
+
+    async addProject(connection: Connection, project: Project) {
+        const projectRepo = connection.getRepository(Project);
+
+        const project_result = await projectRepo.create(project);
+        await projectRepo.save(project_result);
+        
+        return this.getProjects(connection);
+    }
+    
+    async updateProject(connection: Connection, project: Project) {
+        const projectRepo = connection.getRepository(Project);
+
+        let projectToUpdate = await projectRepo.findOne(project.id);
+
+        projectToUpdate.name = project.name;
+        projectToUpdate.account = project.account;
+        
+        await projectRepo.save(projectToUpdate);
+
+        return this.getProjects(connection);
+    }
+
+    async deleteProjectById(connection: Connection, project_id: number) {
+        const projectRepo = connection.getRepository(Project);
+        const projectToDelete = await projectRepo.findOne(project_id);
+        await projectRepo.remove(projectToDelete);
+        return this.getProjects(connection);
     }
 }

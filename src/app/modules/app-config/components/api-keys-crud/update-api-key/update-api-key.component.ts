@@ -1,10 +1,10 @@
-import { AppService } from '@core/services/app.service';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Apikey } from '@assets/models/apikey.entity';
 import { Account } from '@assets/models/account.entity';
 import { ApikeyService } from '@core/services/repository/apikey.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { AccountService } from '@core/services';
 
 @Component({
   selector: 'app-update-api-key',
@@ -18,7 +18,7 @@ export class UpdateApiKeyComponent implements OnInit {
   accountsList: Account[];
   tempApikey: Apikey[];
 
-  constructor(private builder: FormBuilder, private appService: AppService ,private apikeyService: ApikeyService, private bsModalRef: BsModalRef) { }
+  constructor(private builder: FormBuilder, private accountService: AccountService ,private apikeyService: ApikeyService, private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
     this.editApiKeyForm = this.builder.group({
@@ -30,7 +30,7 @@ export class UpdateApiKeyComponent implements OnInit {
       bearer_token: new FormControl(this.tempApikey[0].bearer_token, []),
     });
 
-    this.appService.getAccounts().subscribe((accounts: any) => {
+    this.accountService.getAccounts().subscribe((accounts: any) => {
       this.accountsList = accounts;
     });
 
@@ -46,7 +46,7 @@ export class UpdateApiKeyComponent implements OnInit {
     tempApikey.access_token = this.editApiKeyForm.get('access_secret').value;
     tempApikey.bearer_token = this.editApiKeyForm.get('bearer_token').value;
 
-    this.appService.getAccountById(this.editApiKeyForm.get('accounts').value).subscribe(account => {
+    this.accountService.getAccountById(this.editApiKeyForm.get('accounts').value).subscribe(account => {
       tempApikey.account = account[0];
 
       this.apikeyService.updateApikey(tempApikey).subscribe( apikeys => {

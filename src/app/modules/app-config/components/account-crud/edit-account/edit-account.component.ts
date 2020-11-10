@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Account } from '@assets/models/account.entity';
+import { AccountService } from '@core/services';
 import { AppService } from '@core/services/app.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -15,7 +16,7 @@ export class EditAccountComponent implements OnInit {
   event: EventEmitter<any> = new EventEmitter();
   tempAccount: Account;
 
-  constructor(private builder: FormBuilder, private appservice: AppService, private bsModalRef: BsModalRef) { }
+  constructor(private builder: FormBuilder, private accountService: AccountService, private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
 
@@ -31,7 +32,7 @@ export class EditAccountComponent implements OnInit {
     tempAccount.name = this.editAccountForm.get('account_name').value;
     tempAccount.in_use = this.tempAccount[0].in_use;
 
-    this.appservice.updateAccount(tempAccount).subscribe( accounts => {
+    this.accountService.updateAccount(tempAccount).subscribe( accounts => {
       
       if(accounts!=null && accounts.length>0){
         let response = {

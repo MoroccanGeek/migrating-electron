@@ -2,9 +2,9 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Apikey } from '@assets/models/apikey.entity';
 import { Account } from '@assets/models/account.entity';
-import { AppService } from '@core/services/app.service';
 import { ApikeyService } from '@core/services/repository/apikey.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { AccountService } from '@core/services';
 
 @Component({
   selector: 'app-add-new-api-key',
@@ -17,7 +17,7 @@ export class AddNewApiKeyComponent implements OnInit {
   event: EventEmitter<any>=new EventEmitter();
   accountsList: Account[];
 
-  constructor(private builder: FormBuilder, private appService:AppService, private apikeyService: ApikeyService, private bsModalRef: BsModalRef) { }
+  constructor(private builder: FormBuilder, private accountService:AccountService, private apikeyService: ApikeyService, private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
     this.addNewApiKeyForm = this.builder.group({
@@ -30,7 +30,7 @@ export class AddNewApiKeyComponent implements OnInit {
     });
     
 
-    this.appService.getAccounts().subscribe((accounts: any) => {
+    this.accountService.getAccounts().subscribe((accounts: any) => {
       this.accountsList = accounts;
 
       this.addNewApiKeyForm.controls['accounts'].setValue(this.accountsList[0].id,{onlySelf: true});

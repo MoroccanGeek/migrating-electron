@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppConfigRoutingModule } from './app-config-routing.module';
-
-import { AccountManagementPage } from './pages/account-management/account-management.page';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
+import { AppRoutingModule } from 'app/app-routing.module';
 
 import { AppConfigPage } from './pages/app-config/app-config.page';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { AddNewItemComponent } from './components/account-crud/add-new-account/add-new-account.component';
-
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from 'app/app-routing.module';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+
+import { AddNewAccountComponent } from './components/account-crud/add-new-account/add-new-account.component';
+import { AccountManagementPage } from './pages/account-management/account-management.page';
 import { DeleteAccountComponent } from './components/account-crud/delete-account/delete-account.component';
-import { UpdateAccountComponent } from './components/account-crud/update-account/update-account.component';
 import { EditAccountComponent } from './components/account-crud/edit-account/edit-account.component';
+
 import { ApiKeysManagementPage } from './pages/api-keys-management/api-keys-management.page';
 import { AddNewApiKeyComponent } from './components/api-keys-crud/add-new-api-key/add-new-api-key.component';
 import { DeleteApiKeyComponent } from './components/api-keys-crud/delete-api-key/delete-api-key.component';
@@ -27,10 +26,9 @@ import { UpdateApiKeyComponent } from './components/api-keys-crud/update-api-key
     AccountManagementPage,
     AppConfigPage,
     SidebarComponent,
-    AddNewItemComponent,
+    AddNewAccountComponent,
     EditAccountComponent,
     DeleteAccountComponent,
-    UpdateAccountComponent,
     ApiKeysManagementPage,
     AddNewApiKeyComponent,
     DeleteApiKeyComponent,

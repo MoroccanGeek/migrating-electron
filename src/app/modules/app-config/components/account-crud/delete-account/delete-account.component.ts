@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { AppService } from '@core/services/app.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Account } from '@assets/models/account.entity';
+import { AccountService } from '@core/services';
 
 @Component({
   selector: 'app-delete-account',
@@ -13,13 +14,13 @@ export class DeleteAccountComponent implements OnInit {
   event: EventEmitter<any> = new EventEmitter();
   tempAccount: Account;
 
-  constructor(private appservice: AppService, private bsModalRef: BsModalRef) { }
+  constructor(private accountService: AccountService, private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
   }
 
   deleteAccount() {
-    this.appservice.deleteAccountById(this.tempAccount[0].id).subscribe( accounts => {
+    this.accountService.deleteAccountById(this.tempAccount[0].id).subscribe( accounts => {
 
       if(accounts!=null){
         let response = {

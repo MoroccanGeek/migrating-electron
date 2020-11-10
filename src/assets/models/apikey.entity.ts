@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Account } from './account.entity';
+import { Project } from './project.entity';
 
 @Entity()
 export class Apikey
@@ -25,7 +26,14 @@ export class Apikey
     @Column()
     in_use: number;
 
+    // This column can not be NULL
     @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE',eager: true })
     @JoinColumn({ name: "account_id" })
     account: Account;
+
+    // This column can be NULL, that why we added {nullable: true}
+    @ManyToOne(() => Project, project => project.apikeys, { onDelete: 'CASCADE',eager: true, nullable: true })
+    @JoinColumn({ name: "project_id" })
+    project: Project;
+
 }

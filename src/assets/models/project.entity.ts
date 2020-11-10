@@ -1,4 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Apikey } from './apikey.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Account } from './account.entity';
 
 @Entity()
@@ -13,4 +14,7 @@ export class Project {
     @ManyToOne(() => Account, account => account.apikeys, { onDelete: 'CASCADE',eager: true })
     @JoinColumn({ name: "account_id" })
     account: Account;
+
+    @OneToMany(() => Apikey, apikey => apikey.project)
+    apikeys: Apikey[];
 }

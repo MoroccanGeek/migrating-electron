@@ -14,7 +14,8 @@
                 <table id="mytable" class="table table-bordred table-striped">
                     <thead>
                         <th><i class="fas fa-project-diagram"></i> Id</th>
-                        <th>Project Name</th>
+                        <th>Project's name</th>
+                        <th>Project's account</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </thead>
@@ -22,6 +23,7 @@
                         <tr *ngFor="let project of projectList">
                             <td>{{project.id}}</td>
                             <td>{{project.name}}</td>
+                            <td>{{project.account.name}}</td>
                             <td>
                                 <button type="button" class="btn btn-warning" (click)="updateProject(project.id)">Edit</button>
                             </td>

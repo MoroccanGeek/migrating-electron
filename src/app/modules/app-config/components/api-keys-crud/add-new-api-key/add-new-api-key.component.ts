@@ -69,6 +69,8 @@ export class AddNewApiKeyComponent implements OnInit {
     temp_apikey.account = this.addNewApiKeyForm.get('accounts').value;
     temp_apikey.project = this.addNewApiKeyForm.get('projects').value;
 
+    console.log(temp_apikey);
+
     this.apikeyService.addApiKey(temp_apikey).subscribe( apikeys => {
       
       if(apikeys!=null && apikeys.length>0){

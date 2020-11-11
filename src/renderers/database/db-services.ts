@@ -105,6 +105,7 @@ export class DatabaseService {
         apikeyToUpdate.access_secret = apikey.access_secret;
         apikeyToUpdate.bearer_token = apikey.bearer_token;
         apikeyToUpdate.account = apikey.account;
+        apikeyToUpdate.project = apikey.project;
         
         await apikeyRepo.save(apikeyToUpdate);
 
@@ -153,7 +154,6 @@ export class DatabaseService {
         let projectToUpdate = await projectRepo.findOne(project.id);
 
         projectToUpdate.name = project.name;
-        projectToUpdate.account = project.account;
         
         await projectRepo.save(projectToUpdate);
 

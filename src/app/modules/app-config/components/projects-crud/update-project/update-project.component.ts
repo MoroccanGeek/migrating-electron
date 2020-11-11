@@ -21,39 +21,24 @@ export class UpdateProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.UpdateProjectForm = this.builder.group({
-      accounts: new FormControl(null),
       name: new FormControl(this.tempProject.name, []),
     });
-
-    this.accountService.getAccounts().subscribe((accounts: any) => {
-      this.accountsList = accounts;
-    });
-
-    // this is to dynamically select the Account of the given API key
-    this.UpdateProjectForm.controls['accounts'].setValue(this.tempProject.account.id,{onlySelf: true});
   }
 
   onProjectUpdateFormSubmit() {
 
-    // let tempProject = new Project();
-
     this.tempProject.name = this.UpdateProjectForm.get('name').value;
 
-    this.accountService.getAccountById(this.UpdateProjectForm.get('accounts').value).subscribe(account => {
-      this.tempProject.account = account;
-
-      this.projectService.updateProject(this.tempProject).subscribe( projects => {
+    this.projectService.updateProject(this.tempProject).subscribe( projects => {
       
-        if(projects!=null && projects.length>0){
-          let response = {
-            'response': 'OK',
-            'data': projects
-          }
-          this.event.emit(response);
-          this.bsModalRef.hide();
+      if(projects!=null && projects.length>0){
+        let response = {
+          'response': 'OK',
+          'data': projects
         }
-      });
-      
+        this.event.emit(response);
+        this.bsModalRef.hide();
+      }
     });
 
   }

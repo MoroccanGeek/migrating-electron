@@ -31,7 +31,10 @@
                     <div class="form-group col-12">
                         <label class="control-label">Key</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="key" placeholder="Type your Twitter Api Key"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && editApiKeyForm.controls.key.errors) || (editApiKeyForm.controls.key.dirty && editApiKeyForm.controls.key.invalid) }" formControlName="key" placeholder="Type your Twitter Api Key"/>
+                            <div *ngIf="(submitted && editApiKeyForm.controls.key.errors) || (editApiKeyForm.controls.key.dirty && editApiKeyForm.controls.key.invalid)" class="invalid-feedback">
+                                <span *ngIf="editApiKeyForm.controls.key.errors.required">Api Key is required</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,7 +42,10 @@
                     <div class="form-group col-12">
                         <label class="control-label">Key Secret</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="secret_key" placeholder="Type your Twitter Api Secret Key"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && editApiKeyForm.controls.secret_key.errors) || (editApiKeyForm.controls.secret_key.dirty && editApiKeyForm.controls.secret_key.invalid) }" formControlName="secret_key" placeholder="Type your Twitter Api Secret Key"/>
+                            <div *ngIf="(submitted && editApiKeyForm.controls.secret_key.errors)|| (editApiKeyForm.controls.secret_key.dirty && editApiKeyForm.controls.secret_key.invalid)" class="invalid-feedback">
+                                <span *ngIf="editApiKeyForm.controls.secret_key.errors.required">Secret Key is required</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +53,10 @@
                     <div class="form-group col-12">
                         <label class="control-label">Access Token</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="access_token" placeholder="Type your Twitter Api access token"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && editApiKeyForm.controls.access_token.errors) || (editApiKeyForm.controls.access_token.dirty && editApiKeyForm.controls.access_token.invalid) }" formControlName="access_token" placeholder="Type your Twitter Api access token"/>
+                            <div *ngIf="(submitted && editApiKeyForm.controls.access_token.errors) || (editApiKeyForm.controls.access_token.dirty && editApiKeyForm.controls.access_token.invalid)" class="invalid-feedback">
+                                <span *ngIf="editApiKeyForm.controls.access_token.errors.required">Access token is required</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +64,10 @@
                     <div class="form-group col-12">
                         <label class="control-label">Access Secret</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="access_secret" placeholder="Type your Twitter Api access secret"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && editApiKeyForm.controls.access_secret.errors) || (editApiKeyForm.controls.access_secret.dirty && editApiKeyForm.controls.access_secret.invalid) }" formControlName="access_secret" placeholder="Type your Twitter Api access secret"/>
+                            <div *ngIf="(submitted && editApiKeyForm.controls.access_secret.errors) || (editApiKeyForm.controls.access_secret.dirty && editApiKeyForm.controls.access_secret.invalid)" class="invalid-feedback">
+                                <span *ngIf="editApiKeyForm.controls.access_secret.errors.required">Access secret is required</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,7 +75,10 @@
                     <div class="form-group col-12">
                         <label class="control-label">Bearer Token</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="bearer_token" placeholder="Type your Twitter Api bearer token"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && editApiKeyForm.controls.bearer_token.errors) || (editApiKeyForm.controls.bearer_token.dirty && editApiKeyForm.controls.bearer_token.invalid) }" formControlName="bearer_token" placeholder="Type your Twitter Api bearer token"/>
+                            <div *ngIf="(submitted && editApiKeyForm.controls.bearer_token.errors) || (editApiKeyForm.controls.bearer_token.dirty && editApiKeyForm.controls.bearer_token.invalid)" class="invalid-feedback">
+                                <span *ngIf="editApiKeyForm.controls.bearer_token.errors.required">Bearer token token is required</span>
+                            </div>
                         </div>
                     </div>
                 </div>

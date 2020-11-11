@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Apikey } from '@assets/models/apikey.entity';
 import { Account } from '@assets/models/account.entity';
 import { ApikeyService } from '@core/services/repository/apikey.service';
@@ -19,6 +19,7 @@ export class UpdateApiKeyComponent implements OnInit {
   accountsList: Account[];
   tempApikey: Apikey[];
   projectsList: Project[];
+  submitted = false;
 
   constructor(
     private builder: FormBuilder,
@@ -31,11 +32,11 @@ export class UpdateApiKeyComponent implements OnInit {
     this.editApiKeyForm = this.builder.group({
       accounts: new FormControl('', []),
       projects: new FormControl('', []),
-      key: new FormControl(this.tempApikey[0].key, []),
-      secret_key: new FormControl(this.tempApikey[0].secret_key, []),
-      access_token: new FormControl(this.tempApikey[0].access_token, []),
-      access_secret: new FormControl(this.tempApikey[0].access_secret, []),
-      bearer_token: new FormControl(this.tempApikey[0].bearer_token, []),
+      key: new FormControl(this.tempApikey[0].key, [Validators.required]),
+      secret_key: new FormControl(this.tempApikey[0].secret_key, Validators.required),
+      access_token: new FormControl(this.tempApikey[0].access_token, Validators.required),
+      access_secret: new FormControl(this.tempApikey[0].access_secret, Validators.required),
+      bearer_token: new FormControl(this.tempApikey[0].bearer_token, Validators.required),
     });
 
 
@@ -71,6 +72,13 @@ export class UpdateApiKeyComponent implements OnInit {
   }
 
   onApiKeyEditFormSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.editApiKeyForm.invalid) {
+        return;
+    }
+
     let tempApikey = new Apikey();
 
     tempApikey.id = this.tempApikey[0].id;

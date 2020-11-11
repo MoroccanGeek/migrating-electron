@@ -1,3 +1,4 @@
+import { InputValidator } from '@shared/custom-form-validators/input.validator';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Apikey } from '@assets/models/apikey.entity';
@@ -32,11 +33,11 @@ export class UpdateApiKeyComponent implements OnInit {
     this.editApiKeyForm = this.builder.group({
       accounts: new FormControl('', []),
       projects: new FormControl('', []),
-      key: new FormControl(this.tempApikey[0].key, [Validators.required]),
-      secret_key: new FormControl(this.tempApikey[0].secret_key, Validators.required),
-      access_token: new FormControl(this.tempApikey[0].access_token, Validators.required),
-      access_secret: new FormControl(this.tempApikey[0].access_secret, Validators.required),
-      bearer_token: new FormControl(this.tempApikey[0].bearer_token, Validators.required),
+      key: new FormControl(this.tempApikey[0].key, [Validators.required,InputValidator.noWhiteSpace]),
+      secret_key: new FormControl(this.tempApikey[0].secret_key, [Validators.required,InputValidator.noWhiteSpace]),
+      access_token: new FormControl(this.tempApikey[0].access_token, [Validators.required,InputValidator.noWhiteSpace]),
+      access_secret: new FormControl(this.tempApikey[0].access_secret, [Validators.required,InputValidator.noWhiteSpace]),
+      bearer_token: new FormControl(this.tempApikey[0].bearer_token, [Validators.required,InputValidator.noWhiteSpace]),
     });
 
 

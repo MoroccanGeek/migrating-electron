@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Project } from '@assets/models/project.entity';
-import { ProjectService } from '@core/services';
+import { AccountService, ProjectService } from '@core/services';
+import { ConfigErrorModalComponent } from '@shared/components/error-modals/config-error-modal/config-error-modal.component';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { AddNewProjectComponent } from '../../components/projects-crud/add-new-project/add-new-project.component';
 import { DeleteProjectComponent } from '../../components/projects-crud/delete-project/delete-project.component';
@@ -16,19 +17,30 @@ export class ProjectManagementPage implements OnInit {
   projectList: Project[];
   bsModalRef: BsModalRef;
   
-  constructor(private projectService: ProjectService, private bsModalService: BsModalService) { }
+  constructor(private accountService: AccountService, private projectService: ProjectService, private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
     this.projectService.getProjects().subscribe((projects: any) => (this.projectList = projects));
   }
 
-  addNewProject(){
-    this.bsModalRef = this.bsModalService.show(AddNewProjectComponent);
-    this.bsModalRef.content.event.subscribe(result => {
-      if (result.response == 'OK') {
-        this.projectList = result.data;
+  addNewProject(template: TemplateRef<any>){
+
+    this.accountService.accountsExists().subscribe(response => {
+      if(!response){
+        const initialState = {
+          message: 'No project was found. Try again after a project is added.'
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigErrorModalComponent, {initialState});
       }
-    });
+      else{
+        this.bsModalRef = this.bsModalService.show(AddNewProjectComponent);
+        this.bsModalRef.content.event.subscribe(result => {
+          if (result.response == 'OK') {
+            this.projectList = result.data;
+          }
+        });
+      }
+    })
   }
 
   updateProject(projectId: number) {

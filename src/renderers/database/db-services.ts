@@ -71,6 +71,11 @@ export class DatabaseService {
         return this.getAccounts(connection);
     }
 
+    async accountExists(connection: Connection) {
+        const accountRepo = connection.getRepository(Account);
+        return await accountRepo.findOne();
+    }
+
 // For API Keys CRUD
     async getApikeys(connection: Connection){
 

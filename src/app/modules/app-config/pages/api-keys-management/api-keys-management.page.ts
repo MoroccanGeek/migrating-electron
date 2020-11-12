@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApikeyService } from '@core/services/repository/apikey.service';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Apikey } from '@assets/models/apikey.entity';
+import { AccountService } from '@core/services';
+import { ConfigErrorModalComponent } from '@shared/components/error-modals/config-error-modal/config-error-modal.component';
 
 @Component({
   selector: 'app-api-keys-management',
@@ -16,7 +18,7 @@ export class ApiKeysManagementPage implements OnInit {
   apiKeyList: Apikey[];
   bsModalRef: BsModalRef;
 
-  constructor(private apikeyService: ApikeyService, private bsModalService: BsModalService) { }
+  constructor(private accountService: AccountService, private apikeyService: ApikeyService, private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
     this.apikeyService.getApiKeys().subscribe((apikeys: any) => {
@@ -27,14 +29,27 @@ export class ApiKeysManagementPage implements OnInit {
   }
 
   addNewApiKey(): void {
-    const initialState = { class: "modal-lg" };
+
+    this.accountService.accountsExists().subscribe(response => {
+      if(!response){
+        const initialState = {
+          message: 'No project was found. Try again after a project is added.'
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigErrorModalComponent, {initialState});
+      }
+      else{
+        const initialState = { class: "modal-lg" };
     
-    this.bsModalRef = this.bsModalService.show(AddNewApiKeyComponent, initialState);
-    this.bsModalRef.content.event.subscribe(result => {
-      if (result.response == 'OK') {
-        this.apiKeyList = result.data;
+        this.bsModalRef = this.bsModalService.show(AddNewApiKeyComponent, initialState);
+        this.bsModalRef.content.event.subscribe(result => {
+          if (result.response == 'OK') {
+            this.apiKeyList = result.data;
+          }
+        });
       }
     });
+
+    
   }
 
   updateApiKey(apikeyId: number): void {

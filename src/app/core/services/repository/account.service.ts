@@ -50,4 +50,12 @@ export class AccountService {
       catchError((error: any) => throwError(error.json))
     );
   }
+
+  accountsExists() {
+    const result = this.electronService.ipcRenderer.invoke('account-exists');
+
+    return from(result).pipe(
+      catchError((error: any) => throwError(error.json))
+    );
+  }
 }

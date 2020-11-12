@@ -31,7 +31,11 @@
                     <div class="form-group col-12">
                         <label class="control-label">Key</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="key" placeholder="Type your Twitter Api Key"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && addNewApiKeyForm.controls.key.errors) || (addNewApiKeyForm.controls.key.dirty && addNewApiKeyForm.controls.key.invalid) }" formControlName="key" placeholder="Type your Twitter Api Key"/>
+                            <div *ngIf="(submitted && addNewApiKeyForm.controls.key.errors) || (addNewApiKeyForm.controls.key.dirty && addNewApiKeyForm.controls.key.invalid)" class="invalid-feedback">
+                                <span *ngIf="addNewApiKeyForm.controls.key.errors.required">Api Key is required</span>
+                                <span *ngIf="addNewApiKeyForm.controls.key.errors.noWhiteSpace">No Whitespace is allowed</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,7 +43,11 @@
                     <div class="form-group col-12">
                         <label class="control-label">Key Secret</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="secret_key" placeholder="Type your Twitter Api Secret Key"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && addNewApiKeyForm.controls.secret_key.errors) || (addNewApiKeyForm.controls.secret_key.dirty && addNewApiKeyForm.controls.secret_key.invalid) }" formControlName="secret_key" placeholder="Type your Twitter Api Secret Key"/>
+                            <div *ngIf="(submitted && addNewApiKeyForm.controls.secret_key.errors)|| (addNewApiKeyForm.controls.secret_key.dirty && addNewApiKeyForm.controls.secret_key.invalid)" class="invalid-feedback">
+                                <span *ngIf="addNewApiKeyForm.controls.secret_key.errors.required">Secret Key is required</span>
+                                <span *ngIf="addNewApiKeyForm.controls.secret_key.errors.noWhiteSpace">No Whitespace is allowed</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +55,11 @@
                     <div class="form-group col-12">
                         <label class="control-label">Access Token</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="access_token" placeholder="Type your Twitter Api access token"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && addNewApiKeyForm.controls.access_token.errors) || (addNewApiKeyForm.controls.access_token.dirty && addNewApiKeyForm.controls.access_token.invalid) }" formControlName="access_token" placeholder="Type your Twitter Api access token"/>
+                            <div *ngIf="(submitted && addNewApiKeyForm.controls.access_token.errors) || (addNewApiKeyForm.controls.access_token.dirty && addNewApiKeyForm.controls.access_token.invalid)" class="invalid-feedback">
+                                <span *ngIf="addNewApiKeyForm.controls.access_token.errors.required">Access token is required</span>
+                                <span *ngIf="addNewApiKeyForm.controls.access_token.errors.noWhiteSpace">No Whitespace is allowed</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,7 +67,11 @@
                     <div class="form-group col-12">
                         <label class="control-label">Access Secret</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="access_secret" placeholder="Type your Twitter Api access secret"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && addNewApiKeyForm.controls.access_secret.errors) || (addNewApiKeyForm.controls.access_secret.dirty && addNewApiKeyForm.controls.access_secret.invalid) }" formControlName="access_secret" placeholder="Type your Twitter Api access secret"/>
+                            <div *ngIf="(submitted && addNewApiKeyForm.controls.access_secret.errors) || (addNewApiKeyForm.controls.access_secret.dirty && addNewApiKeyForm.controls.access_secret.invalid)" class="invalid-feedback">
+                                <span *ngIf="addNewApiKeyForm.controls.access_secret.errors.required">Access secret is required</span>
+                                <span *ngIf="addNewApiKeyForm.controls.access_secret.errors.noWhiteSpace">No Whitespace is allowed</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -63,7 +79,11 @@
                     <div class="form-group col-12">
                         <label class="control-label">Bearer Token</label>
                         <div>
-                            <input type="text" class="form-control" formControlName="bearer_token" placeholder="Type your Twitter Api bearer token"/>
+                            <input type="text" class="form-control" [ngClass]="{ 'is-invalid': (submitted && addNewApiKeyForm.controls.bearer_token.errors) || (addNewApiKeyForm.controls.bearer_token.dirty && addNewApiKeyForm.controls.bearer_token.invalid) }" formControlName="bearer_token" placeholder="Type your Twitter Api bearer token"/>
+                            <div *ngIf="(submitted && addNewApiKeyForm.controls.bearer_token.errors) || (addNewApiKeyForm.controls.bearer_token.dirty && addNewApiKeyForm.controls.bearer_token.invalid)" class="invalid-feedback">
+                                <span *ngIf="addNewApiKeyForm.controls.bearer_token.errors.required">Bearer token token is required</span>
+                                <span *ngIf="addNewApiKeyForm.controls.bearer_token.errors.noWhiteSpace">No Whitespace is allowed</span>
+                            </div>
                         </div>
                     </div>
                 </div>

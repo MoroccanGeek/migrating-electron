@@ -1,11 +1,12 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Apikey } from '@assets/models/apikey.entity';
 import { Account } from '@assets/models/account.entity';
 import { ApikeyService } from '@core/services/repository/apikey.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AccountService, ProjectService } from '@core/services';
 import { Project } from '@assets/models/project.entity';
+import { InputValidator } from '@shared/custom-form-validators/input.validator';
 
 @Component({
   selector: 'app-add-new-api-key',
@@ -18,6 +19,7 @@ export class AddNewApiKeyComponent implements OnInit {
   event: EventEmitter<any> =new EventEmitter();
   accountsList: Account[];
   projectsList: Project[];
+  submitted = false;
 
   constructor(
     private builder: FormBuilder, 
@@ -30,11 +32,11 @@ export class AddNewApiKeyComponent implements OnInit {
     this.addNewApiKeyForm = this.builder.group({
       accounts: new FormControl('', []),
       projects: new FormControl('', []),
-      key: new FormControl('', []),
-      secret_key: new FormControl('', []),
-      access_token: new FormControl('', []),
-      access_secret: new FormControl('', []),
-      bearer_token: new FormControl('', []),
+      key: new FormControl('', [Validators.required,InputValidator.noWhiteSpace]),
+      secret_key: new FormControl('', [Validators.required,InputValidator.noWhiteSpace]),
+      access_token: new FormControl('', [Validators.required,InputValidator.noWhiteSpace]),
+      access_secret: new FormControl('', [Validators.required,InputValidator.noWhiteSpace]),
+      bearer_token: new FormControl('', [Validators.required,InputValidator.noWhiteSpace]),
     });
     
     let accounts = await this.accountService.getAccounts().toPromise();
@@ -57,6 +59,12 @@ export class AddNewApiKeyComponent implements OnInit {
   }
 
   onApiKeyFormSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.addNewApiKeyForm.invalid) {
+        return;
+    }
 
     let temp_apikey = new Apikey();
 

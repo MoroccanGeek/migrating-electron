@@ -37,8 +37,7 @@ export class ProjectManagementPage implements OnInit {
       const modalOptions: ModalOptions = {
         initialState: {
           tempProject: project
-        },
-        class: "modal-lg"
+        }
       }
 
         this.bsModalRef = this.bsModalService.show(UpdateProjectComponent, modalOptions);

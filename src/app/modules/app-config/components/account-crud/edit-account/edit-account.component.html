@@ -12,7 +12,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Account's name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" formControlName="account_name" />
+                        <input type="text" [ngClass]="{ 'is-invalid': (submitted && editAccountForm.controls.account_name.errors) || (editAccountForm.controls.account_name.dirty && editAccountForm.controls.account_name.invalid) }" class="form-control" formControlName="account_name" />
+                        <div *ngIf="(submitted && editAccountForm.controls.account_name.errors) || (editAccountForm.controls.account_name.dirty && editAccountForm.controls.account_name.invalid)" class="invalid-feedback">
+                            <span *ngIf="editAccountForm.controls.account_name.errors.required">Access secret is required</span>
+                            <span *ngIf="editAccountForm.controls.account_name.errors.noFullWhiteSpace">Full White spaces are not allowed</span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Account } from '@assets/models/account.entity';
 import { AccountService } from '@core/services';
+import { InputValidator } from '@shared/custom-form-validators';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -14,17 +15,24 @@ export class EditAccountComponent implements OnInit {
   editAccountForm: FormGroup;
   event: EventEmitter<any> = new EventEmitter();
   tempAccount: Account;
+  submitted = false;
 
   constructor(private builder: FormBuilder, private accountService: AccountService, private bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
 
     this.editAccountForm = this.builder.group({
-      account_name: new FormControl(this.tempAccount.name, []),
+      account_name: new FormControl(this.tempAccount.name, [Validators.required,InputValidator.noFullWhiteSpace]),
     });
   }
 
   onAccountEditFormSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.editAccountForm.invalid) {
+        return;
+    }
 
     let tempAccount = new Account();
     tempAccount.id = this.tempAccount.id;

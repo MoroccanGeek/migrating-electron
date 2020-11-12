@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-sm-7">
                         <a (click)="addNewAccount()" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>New Dev-Account</span></a>
-                        <a class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>						
+                        <a class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>import JSON</span></a>						
                     </div>
                 </div>
             </div>
@@ -27,15 +27,9 @@
                         <td>{{account.name}}</td>
                         <td>{{account.in_use}}</td>
                         <td>
-                            <a (click)="editAccount(account.id)" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-                            <a (click)="deleteAccount(account.id)" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>
+                            <span (click)="editAccount(account.id)" class="settings" tooltip="Settings"><i class="material-icons">&#xE8B8;</i></span>
+                            <span (click)="deleteAccount(account.id)" class="delete" tooltip="Delete"><i class="material-icons">&#xE5C9;</i></span>
                         </td>
-                        <!-- <td>
-                            <button type="button" class="btn btn-warning" (click)="editAccount(account.id)">Edit</button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-danger" (click)="deleteAccount(account.id)">Delete</button>
-                        </td> -->
                     </tr>
                 </tbody>
             </table>

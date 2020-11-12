@@ -56,6 +56,18 @@ table.table tr th:first-child {
 table.table tr th:last-child {
     width: 100px;
 }
+
+table.table thead th:last-child{
+    display: flex;
+    justify-content: center;
+}
+table.table tr td:last-child {
+    display: flex;
+    justify-content: space-between;
+    max-width: 125px;
+    margin: 0 auto;
+    padding: 10px 0;
+}
 table.table-striped tbody tr:nth-of-type(odd) {
     background-color: #fcfcfc;
 }
@@ -81,11 +93,13 @@ table.table td a {
 table.table td a:hover {
     color: #2196F3;
 }
-table.table td a.settings {
+table.table td span.settings {
     color: #2196F3;
+    cursor: pointer;
 }
-table.table td a.delete {
+table.table td span.delete {
     color: #F44336;
+    cursor: pointer;
 }
 table.table td i {
     font-size: 19px;
@@ -95,6 +109,8 @@ table.table .avatar {
     vertical-align: middle;
     margin-right: 10px;
 }
+
+
 .status {
     font-size: 30px;
     margin: 2px 2px 0 0;

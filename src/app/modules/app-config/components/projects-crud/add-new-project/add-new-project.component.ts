@@ -5,6 +5,7 @@ import { Account } from '@assets/models/account.entity';
 import { AccountService } from '@core/services';
 import { ProjectService } from '@core/services';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { InputValidator } from '@shared/custom-form-validators/input.validator';
 
 @Component({
   selector: 'app-add-new-project',
@@ -24,7 +25,7 @@ export class AddNewProjectComponent implements OnInit {
 
     this.addNewProjectForm = this.builder.group({
       accounts: new FormControl('', []),
-      name: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required,InputValidator.noFullWhiteSpace])
     });
     
 

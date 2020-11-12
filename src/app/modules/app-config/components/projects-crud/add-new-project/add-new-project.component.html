@@ -23,6 +23,7 @@
                         <input type="text" [ngClass]="{ 'is-invalid': (submitted && addNewProjectForm.controls.name.errors) || (addNewProjectForm.controls.name.dirty && addNewProjectForm.controls.name.invalid) }" class="form-control" formControlName="name" />
                         <div *ngIf="(submitted && addNewProjectForm.controls.name.errors) || (addNewProjectForm.controls.name.dirty && addNewProjectForm.controls.name.invalid)" class="invalid-feedback">
                             <span *ngIf="addNewProjectForm.controls.name.errors.required">Access secret is required</span>
+                            <span *ngIf="addNewProjectForm.controls.name.errors.noFullWhiteSpace">Full White spaces are not allowed</span>
                         </div>
                     </div>
                 </div>

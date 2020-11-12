@@ -4,6 +4,7 @@ import { Account } from '@assets/models/account.entity';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService, ProjectService } from '@core/services';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { InputValidator } from '@shared/custom-form-validators';
 
 @Component({
   selector: 'app-update-project',
@@ -22,7 +23,7 @@ export class UpdateProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.UpdateProjectForm = this.builder.group({
-      name: new FormControl(this.tempProject.name, [Validators.required]),
+      name: new FormControl(this.tempProject.name, [Validators.required,InputValidator.noFullWhiteSpace]),
     });
   }
 

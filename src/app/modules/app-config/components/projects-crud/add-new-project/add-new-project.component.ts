@@ -4,8 +4,9 @@ import { Project } from '@assets/models/project.entity';
 import { Account } from '@assets/models/account.entity';
 import { AccountService } from '@core/services';
 import { ProjectService } from '@core/services';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { InputValidator } from '@shared/custom-form-validators/input.validator';
+import { ConfigValidModalComponent } from '@shared/components/valid-modals/config-valid-modal/config-valid-modal.component';
 
 @Component({
   selector: 'app-add-new-project',
@@ -19,7 +20,12 @@ export class AddNewProjectComponent implements OnInit {
   accountsList: Account[];
   submitted = false;
 
-  constructor(private builder: FormBuilder, private accountService:AccountService, private projectService: ProjectService, private bsModalRef: BsModalRef) { }
+  constructor(
+    private builder: FormBuilder, 
+    private accountService:AccountService, 
+    private projectService: ProjectService, 
+    private bsModalRef: BsModalRef,
+    private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
 
@@ -59,6 +65,14 @@ export class AddNewProjectComponent implements OnInit {
         }
         this.event.emit(response);
         this.bsModalRef.hide();
+
+        const modalOptions = {
+          initialState:
+            {
+              message: "Your project has been created successfully."
+            }
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigValidModalComponent, modalOptions);
       }
     
     });

@@ -3,8 +3,9 @@ import { Project } from '@assets/models/project.entity';
 import { Account } from '@assets/models/account.entity';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AccountService, ProjectService } from '@core/services';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { InputValidator } from '@shared/custom-form-validators';
+import { ConfigValidModalComponent } from '@shared/components/valid-modals/config-valid-modal/config-valid-modal.component';
 
 @Component({
   selector: 'app-update-project',
@@ -19,7 +20,12 @@ export class UpdateProjectComponent implements OnInit {
   tempProject: Project;
   submitted = false;
 
-  constructor(private builder: FormBuilder, private accountService: AccountService ,private projectService: ProjectService, private bsModalRef: BsModalRef) { }
+  constructor(
+    private builder: FormBuilder, 
+    private accountService: AccountService,
+    private projectService: ProjectService, 
+    private bsModalRef: BsModalRef,
+    private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
     this.UpdateProjectForm = this.builder.group({
@@ -47,6 +53,14 @@ export class UpdateProjectComponent implements OnInit {
         }
         this.event.emit(response);
         this.bsModalRef.hide();
+
+        const modalOptions = {
+          initialState:
+            {
+              message: "Your project has been updated successfully."
+            }
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigValidModalComponent, modalOptions);
       }
     });
 

@@ -1,10 +1,11 @@
+import { ConfigValidModalComponent } from './../../../../../shared/components/valid-modals/config-valid-modal/config-valid-modal.component';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Account } from '@assets/models/account.entity';
 import { AccountService } from '@core/services';
 import { AppService } from '@core/services/app.service';
 import { InputValidator } from '@shared/custom-form-validators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-add-new-account',
@@ -17,7 +18,7 @@ export class AddNewAccountComponent implements OnInit {
   event: EventEmitter<any>=new EventEmitter();
   submitted = false;
 
-  constructor(private builder: FormBuilder, private accountService: AccountService, private bsModalRef: BsModalRef) { }
+  constructor(private builder: FormBuilder, private accountService: AccountService, private bsModalRef: BsModalRef, private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
     this.addNewAccountForm = this.builder.group({
@@ -47,6 +48,14 @@ export class AddNewAccountComponent implements OnInit {
         }
         this.event.emit(response);
         this.bsModalRef.hide();
+
+        const modalOptions = {
+          initialState:
+            {
+              message: "Your account has been created successfully."
+            }
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigValidModalComponent, modalOptions);
       }
     
     });

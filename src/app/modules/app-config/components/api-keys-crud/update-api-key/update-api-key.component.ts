@@ -4,9 +4,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Apikey } from '@assets/models/apikey.entity';
 import { Account } from '@assets/models/account.entity';
 import { ApikeyService } from '@core/services/repository/apikey.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AccountService, ProjectService } from '@core/services';
 import { Project } from '@assets/models/project.entity';
+import { ConfigValidModalComponent } from '@shared/components/valid-modals/config-valid-modal/config-valid-modal.component';
 
 @Component({
   selector: 'app-update-api-key',
@@ -27,7 +28,8 @@ export class UpdateApiKeyComponent implements OnInit {
     private accountService: AccountService,
     private apikeyService: ApikeyService,
     private projectService: ProjectService,
-    private bsModalRef: BsModalRef) { }
+    private bsModalRef: BsModalRef,
+    private bsModalService: BsModalService) { }
 
   async ngOnInit() {
     this.editApiKeyForm = this.builder.group({
@@ -100,6 +102,14 @@ export class UpdateApiKeyComponent implements OnInit {
         }
         this.event.emit(response);
         this.bsModalRef.hide();
+
+        const modalOptions = {
+          initialState:
+            {
+              message: "Your API Key has been updated successfully."
+            }
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigValidModalComponent, modalOptions);
       }
     });
   }

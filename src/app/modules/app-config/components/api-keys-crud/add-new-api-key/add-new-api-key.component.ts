@@ -3,10 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Apikey } from '@assets/models/apikey.entity';
 import { Account } from '@assets/models/account.entity';
 import { ApikeyService } from '@core/services/repository/apikey.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AccountService, ProjectService } from '@core/services';
 import { Project } from '@assets/models/project.entity';
 import { InputValidator } from '@shared/custom-form-validators/input.validator';
+import { ConfigValidModalComponent } from '@shared/components/valid-modals/config-valid-modal/config-valid-modal.component';
 
 @Component({
   selector: 'app-add-new-api-key',
@@ -26,7 +27,8 @@ export class AddNewApiKeyComponent implements OnInit {
     private accountService:AccountService, 
     private apikeyService: ApikeyService,
     private projectService: ProjectService,
-    private bsModalRef: BsModalRef) { }
+    private bsModalRef: BsModalRef,
+    private bsModalService: BsModalService) { }
 
   async ngOnInit(): Promise<void> {
     this.addNewApiKeyForm = this.builder.group({
@@ -88,6 +90,14 @@ export class AddNewApiKeyComponent implements OnInit {
         }
         this.event.emit(response);
         this.bsModalRef.hide();
+
+        const modalOptions = {
+          initialState:
+            {
+              message: "Your API Key has been created successfully."
+            }
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigValidModalComponent, modalOptions);
       }
     
     });

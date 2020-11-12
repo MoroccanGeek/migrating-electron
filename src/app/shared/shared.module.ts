@@ -6,9 +6,10 @@ import { FormsModule } from '@angular/forms';
 import * as fromComponents from './components';
 import * as fromValidators from './custom-form-validators';
 import { ConfigErrorModalComponent } from './components/error-modals/config-error-modal/config-error-modal.component';
+import { ConfigValidModalComponent } from './components/valid-modals/config-valid-modal/config-valid-modal.component';
 
 @NgModule({
-  declarations: [...fromComponents.components, ConfigErrorModalComponent],
+  declarations: [...fromComponents.components, ConfigErrorModalComponent, ConfigValidModalComponent],
   imports: [CommonModule, TranslateModule, FormsModule],
   exports: [TranslateModule, ...fromComponents.components]
 })

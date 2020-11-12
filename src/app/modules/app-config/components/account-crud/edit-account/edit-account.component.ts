@@ -2,8 +2,9 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Account } from '@assets/models/account.entity';
 import { AccountService } from '@core/services';
+import { ConfigValidModalComponent } from '@shared/components/valid-modals/config-valid-modal/config-valid-modal.component';
 import { InputValidator } from '@shared/custom-form-validators';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-edit-account',
@@ -17,7 +18,7 @@ export class EditAccountComponent implements OnInit {
   tempAccount: Account;
   submitted = false;
 
-  constructor(private builder: FormBuilder, private accountService: AccountService, private bsModalRef: BsModalRef) { }
+  constructor(private builder: FormBuilder, private accountService: AccountService, private bsModalRef: BsModalRef, private bsModalService: BsModalService) { }
 
   ngOnInit(): void {
 
@@ -48,6 +49,14 @@ export class EditAccountComponent implements OnInit {
         }
         this.event.emit(response);
         this.bsModalRef.hide();
+
+        const modalOptions = {
+          initialState:
+            {
+              message: "Your account has been updated successfully."
+            }
+        }
+        this.bsModalRef = this.bsModalService.show(ConfigValidModalComponent, modalOptions);
       }
     });
   }

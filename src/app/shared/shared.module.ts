@@ -9,6 +9,6 @@ import * as fromValidators from './custom-form-validators';
 @NgModule({
   declarations: [...fromComponents.components],
   imports: [CommonModule, TranslateModule, FormsModule],
-  exports: [TranslateModule, ...fromComponents.components,...fromValidators.validators]
+  exports: [TranslateModule, ...fromComponents.components]
 })
 export class SharedModule {}

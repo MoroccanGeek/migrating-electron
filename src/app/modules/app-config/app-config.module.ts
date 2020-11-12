@@ -26,6 +26,8 @@ import { AddNewProjectComponent } from './components/projects-crud/add-new-proje
 import { UpdateProjectComponent } from './components/projects-crud/update-project/update-project.component';
 import { DeleteProjectComponent } from './components/projects-crud/delete-project/delete-project.component';
 
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 @NgModule({
   declarations: [
     AccountManagementPage,
@@ -51,7 +53,8 @@ import { DeleteProjectComponent } from './components/projects-crud/delete-projec
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [BsModalService],
 })

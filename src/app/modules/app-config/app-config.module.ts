@@ -27,6 +27,7 @@ import { UpdateProjectComponent } from './components/projects-crud/update-projec
 import { DeleteProjectComponent } from './components/projects-crud/delete-project/delete-project.component';
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ReactiveFormsModule,
     AppRoutingModule,
     ModalModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   providers: [BsModalService],
 })

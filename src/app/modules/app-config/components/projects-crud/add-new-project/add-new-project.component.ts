@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Project } from '@assets/models/project.entity';
 import { Account } from '@assets/models/account.entity';
 import { AccountService } from '@core/services';
@@ -16,6 +16,7 @@ export class AddNewProjectComponent implements OnInit {
   addNewProjectForm: FormGroup;
   event: EventEmitter<any>=new EventEmitter();
   accountsList: Account[];
+  submitted = false;
 
   constructor(private builder: FormBuilder, private accountService:AccountService, private projectService: ProjectService, private bsModalRef: BsModalRef) { }
 
@@ -23,7 +24,7 @@ export class AddNewProjectComponent implements OnInit {
 
     this.addNewProjectForm = this.builder.group({
       accounts: new FormControl('', []),
-      name: new FormControl('', [])
+      name: new FormControl('', [Validators.required])
     });
     
 
@@ -36,6 +37,12 @@ export class AddNewProjectComponent implements OnInit {
   }
 
   onProjectFormSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.addNewProjectForm.invalid) {
+        return;
+    }
 
     let temp_project = new Project();
 

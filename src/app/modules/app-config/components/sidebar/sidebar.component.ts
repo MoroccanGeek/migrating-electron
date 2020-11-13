@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  rotation = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggle() {
+    this.rotation = !this.rotation;
   }
 
 }

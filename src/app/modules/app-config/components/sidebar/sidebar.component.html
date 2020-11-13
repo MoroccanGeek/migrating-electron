@@ -1,15 +1,37 @@
-<div class="bg-light border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading">Configuration</div>
-    <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light" routerLink="accounts-management">
-            Twitter.Dev Accounts
-        </a>
-        <a href="#" class="list-group-item list-group-item-action bg-light" routerLink="api-keys-management">
-            API Keys
-        </a>
-        <a href="#" class="list-group-item list-group-item-action bg-light" routerLink="projects-management">
-            Projects
-        </a>
-        <a href="#" class="list-group-item list-group-item-action bg-light">Download Folder location</a>
-    </div>
+<div class="l-navbar" id="navbar" [ngClass]="{'show' : rotation}">
+    <nav class="nav">
+        <div>
+            <a href="#" class="nav__logo">
+                <img src="../../../../../assets/menu-icons/harvester.svg" width="40" alt="" class="nav__logo-icon">
+                <span class="nav__logo-text">Twitter Harvester</span>
+            </a>
+
+            <div class="nav__toggle" id="nav-toggle" [ngClass]="{'rotate' : rotation}" (click)="toggle()">
+                <i class='bx bx-chevron-left'></i>
+            </div>
+
+            <ul class="nav__list">
+                <a href="#" class="nav__link active" routerLink="/home">
+                    <i class='bx bx-home nav__icon'></i>
+                    <span class="nav__text">Home</span>
+                </a>
+                <a href="#" class="nav__link" routerLink="accounts-management">
+                    <i class='bx bx-user nav__icon' ></i>
+                    <span class="nav__text">Accounts</span>
+                </a>
+                <a href="#" class="nav__link" routerLink="api-keys-management">
+                    <i class='bx bx-key nav__icon' ></i>
+                    <span class="nav__text">Api Keys</span>
+                </a>
+                <a href="#" class="nav__link" routerLink="projects-management">
+                    <i class='bx bx-layer-plus nav__icon'></i>
+                    <span class="nav__text">Projects</span>
+                </a>
+                <a href="#" class="nav__link">
+                    <i class='bx bx-folder-open nav__icon'></i>
+                    <span class="nav__text">Download location</span>
+                </a>               
+            </ul>
+        </div>
+    </nav>
 </div>

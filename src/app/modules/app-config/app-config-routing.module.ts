@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
+
 import { AccountManagementPage } from './pages/account-management/account-management.page';
 import { AppConfigPage } from './pages/app-config/app-config.page';
 import { ApiKeysManagementPage } from './pages/api-keys-management/api-keys-management.page';
 import { ProjectManagementPage } from './pages/project-management/project-management.page';
+import { DownloadLocationPage } from './pages/download-location/download-location.page';
 
 const routes: Routes = [
   {
@@ -22,6 +24,10 @@ const routes: Routes = [
       {
         path: 'projects-management',
         component: ProjectManagementPage
+      },
+      {
+        path: 'download-location',
+        component: DownloadLocationPage
       }
     ]
   },

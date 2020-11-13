@@ -28,6 +28,7 @@ import { DeleteProjectComponent } from './components/projects-crud/delete-projec
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { DownloadLocationPage } from './pages/download-location/download-location.page';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     ProjectManagementPage,
     AddNewProjectComponent,
     UpdateProjectComponent,
-    DeleteProjectComponent
+    DeleteProjectComponent,
+    DownloadLocationPage
   ],
   imports: [
     CommonModule,

@@ -36,7 +36,7 @@
             <div *ngIf="accountList" class="clearfix">
                 <div class="hint-text">Showing <b>{{returnedAccountList.length}}</b> out of <b>{{accountList.length}}</b> entries</div>
                 <pagination 
-                    class="pagination"
+                    class="mypagination pagination"
                     [totalItems]="accountList.length"
                     [itemsPerPage]="itemsPerPage"
                     (pageChanged)="pageChanged($event)"

@@ -125,7 +125,8 @@ table.table .avatar {
     float: right;
     margin: 0 0 5px;
 }
-.pagination li a {
+
+.pagination /deep/ li a {
     border: none;
     font-size: 13px;
     min-width: 30px;
@@ -137,20 +138,22 @@ table.table .avatar {
     text-align: center;
     padding: 0 6px;
 }
-.pagination li a:hover {
+
+.pagination /deep/ li a:hover {
     color: #666;
 }	
-.pagination li.active a, .pagination li.active a.page-link {
+.pagination /deep/ li.active a, .pagination /deep/ li.active a.page-link {
     background: #03A9F4;
+    
     color: #fff
 }
-.pagination li.active a:hover {        
+.pagination /deep/ li.active a:hover {        
     background: #0397d6;
 }
-.pagination li.disabled i {
+.pagination /deep/ li.disabled i {
     color: #ccc;
 }
-.pagination li i {
+.pagination /deep/ li i {
     font-size: 16px;
     padding-top: 6px
 }

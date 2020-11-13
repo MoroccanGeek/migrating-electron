@@ -19,19 +19,13 @@ export class AccountManagementPage implements OnInit {
   bsModalRef: BsModalRef;
   itemsPerPage = 10;
   currentPage = 1;
-  x;
 
   constructor(private accountService: AccountService, private bsModalService: BsModalService) {}
 
   async ngOnInit() {
-    // this.accountService.getAccounts().subscribe((accounts: any) => {
-    //   this.accountList = accounts;
-    //   this.returnedAccountList = this.accountList.slice(0,this.itemsPerPage);
-    // });
     this.accountList = await this.accountService.getAccounts().toPromise<Account[]>();
 
     this.returnedAccountList = this.accountList.slice(0,this.itemsPerPage);
-
   }
 
   addNewAccount(){

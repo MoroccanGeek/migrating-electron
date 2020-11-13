@@ -7,6 +7,7 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Apikey } from '@assets/models/apikey.entity';
 import { AccountService } from '@core/services';
 import { ConfigErrorModalComponent } from '@shared/components/error-modals/config-error-modal/config-error-modal.component';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-api-keys-management',
@@ -16,16 +17,18 @@ import { ConfigErrorModalComponent } from '@shared/components/error-modals/confi
 export class ApiKeysManagementPage implements OnInit {
   
   apiKeyList: Apikey[];
+  returnedApiKeyList: Apikey[];
   bsModalRef: BsModalRef;
+  itemsPerPage = 10;
+  currentPage = 1;
 
   constructor(private accountService: AccountService, private apikeyService: ApikeyService, private bsModalService: BsModalService) { }
 
-  ngOnInit(): void {
-    this.apikeyService.getApiKeys().subscribe((apikeys: any) => {
-      this.apiKeyList = apikeys;
+  async ngOnInit() {
 
-      console.log(this.apiKeyList);
-    });
+    this.apiKeyList = await this.apikeyService.getApiKeys().toPromise<Apikey[]>();
+
+    this.returnedApiKeyList = this.apiKeyList.slice(0,this.itemsPerPage);
   }
 
   addNewApiKey(): void {
@@ -44,12 +47,15 @@ export class ApiKeysManagementPage implements OnInit {
         this.bsModalRef.content.event.subscribe(result => {
           if (result.response == 'OK') {
             this.apiKeyList = result.data;
+
+            // This is to stay on the same page after addition
+            const startItem = (this.currentPage - 1) * this.itemsPerPage;
+            const endItem = this.currentPage * this.itemsPerPage;
+            this.returnedApiKeyList = this.apiKeyList.slice(startItem,endItem);
           }
         });
       }
     });
-
-    
   }
 
   updateApiKey(apikeyId: number): void {
@@ -67,6 +73,11 @@ export class ApiKeysManagementPage implements OnInit {
       this.bsModalRef.content.event.subscribe(result => {
         if (result.response == 'OK') {
           this.apiKeyList = result.data;
+
+          // This is to stay on the same page after addition
+          const startItem = (this.currentPage - 1) * this.itemsPerPage;
+          const endItem = this.currentPage * this.itemsPerPage;
+          this.returnedApiKeyList = this.apiKeyList.slice(startItem,endItem);
         }
       });
     });
@@ -83,9 +94,29 @@ export class ApiKeysManagementPage implements OnInit {
       this.bsModalRef.content.event.subscribe(result => {
         if (result.response == 'OK') {
           this.apiKeyList = result.data;
+
+          if(this.currentPage != 1){
+            const numOfItems = this.apiKeyList.length;
+            const previousPageNumOfItems = (this.currentPage-1) * this.itemsPerPage;
+  
+            if(numOfItems === previousPageNumOfItems){
+              this.currentPage -= 1;
+            }
+          }
+          
+          const startItem = (this.currentPage - 1) * this.itemsPerPage;
+          const endItem = this.currentPage * this.itemsPerPage;
+          this.returnedApiKeyList = this.apiKeyList.slice(startItem,endItem);
         }
       });
 
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+
+    this.returnedApiKeyList = this.apiKeyList.slice(startItem, endItem);
   }
 
 }

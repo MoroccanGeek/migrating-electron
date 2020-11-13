@@ -1,41 +1,48 @@
 <router-outlet></router-outlet>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6" style="text-align:center;">
-            <h3>Projects management</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <button type="button" (click)="addNewProject()" class="btn btn-primary btn-xs">New Project</button>
-            <br /><br />
-            <div class="table-responsive">
-                <table id="mytable" class="table table-bordred table-striped">
-                    <thead>
-                        <th><i class="fas fa-project-diagram"></i> Id</th>
-                        <th>Project</th>
-                        <th>Account</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let project of projectList">
-                            <td>{{project.id}}</td>
-                            <td>{{project.name}}</td>
-                            <td>{{project.account.name}}</td>
-                            <td>
-                                <button type="button" class="btn btn-warning"
-                                    (click)="updateProject(project.id)">Edit</button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger"
-                                    (click)="deleteProject(project.id)">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h2>Projects <b>Management</b></h2>
+                    </div>
+                    <div class="col-sm-7">
+                        <a (click)="addNewProject()" class="btn btn-secondary"><i class="material-icons">library_add</i> <span>New Project</span></a>
+                        <a class="btn btn-secondary"><i class="material-icons">note_add</i> <span>import JSON</span></a>						
+                    </div>
+                </div>
+            </div>
+            <table id="mytable" class="table table-striped table-hover">
+                <thead>
+                    <th>#</th>
+                    <th>Project</th>
+                    <th>Account</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let project of returnedProjectList">
+                        <td>{{project.id}}</td>
+                        <td>{{project.name}}</td>
+                        <td>{{project.account.name}}</td>
+                        <td>
+                            <span (click)="updateProject(project.id)" class="settings" tooltip="Settings"><i class="material-icons">&#xE8B8;</i></span>
+                            <span (click)="deleteProject(project.id)" class="delete" tooltip="Delete"><i class="material-icons">&#xE5C9;</i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="projectList" class="clearfix">
+                <div class="hint-text">Showing <b>{{returnedProjectList.length}}</b> out of <b>{{projectList.length}}</b> entries</div>
+                <pagination 
+                    class="mypagination pagination" 
+                    [totalItems]="projectList.length"
+                    [itemsPerPage]="itemsPerPage" 
+                    (pageChanged)="pageChanged($event)" 
+                    [(ngModel)]="currentPage">
+                </pagination>
+            </div>
             </div>
         </div>
     </div>
-</div>

@@ -9,8 +9,8 @@
                         <h2>Twitter Dev-Accounts <b>Management</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <a (click)="addNewAccount()" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>New Dev-Account</span></a>
-                        <a class="btn btn-secondary"><i class="material-icons">&#xE24D;</i> <span>import JSON</span></a>						
+                        <a (click)="addNewAccount()" class="btn btn-secondary"><i class="material-icons">person_add</i> <span>New Dev-Account</span></a>
+                        <a class="btn btn-secondary"><i class="material-icons">note_add</i> <span>import JSON</span></a>						
                     </div>
                 </div>
             </div>
@@ -33,18 +33,15 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="clearfix">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                <!-- <ul class="pagination">
-                    <li class="page-item disabled"><a href="#">Previous</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul> -->
-                <pagination class="pagination" [totalItems]="accountList.length" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+            <div *ngIf="accountList" class="clearfix">
+                <div class="hint-text">Showing <b>{{returnedAccountList.length}}</b> out of <b>{{accountList.length}}</b> entries</div>
+                <pagination 
+                    class="pagination"
+                    [totalItems]="accountList.length"
+                    [itemsPerPage]="itemsPerPage"
+                    (pageChanged)="pageChanged($event)"
+                    [(ngModel)]="currentPage">
+                </pagination>
             </div>
         </div>
     </div>

@@ -17,29 +17,36 @@ export class AccountManagementPage implements OnInit {
   accountList: Account[];
   returnedAccountList: Account[];
   bsModalRef: BsModalRef;
+  itemsPerPage = 10;
+  currentPage = 1;
+  x;
 
   constructor(private accountService: AccountService, private bsModalService: BsModalService) {}
 
-  ngOnInit(): void {
-    console.log('component initialized');
-    this.accountService.getAccounts().subscribe((accounts: any) => {
-      this.accountList = accounts;
-      this.returnedAccountList = this.accountList.slice(0,10);
-    });
+  async ngOnInit() {
+    // this.accountService.getAccounts().subscribe((accounts: any) => {
+    //   this.accountList = accounts;
+    //   this.returnedAccountList = this.accountList.slice(0,this.itemsPerPage);
+    // });
+    this.accountList = await this.accountService.getAccounts().toPromise<Account[]>();
+
+    this.returnedAccountList = this.accountList.slice(0,this.itemsPerPage);
+
   }
 
   addNewAccount(){
+
     this.bsModalRef = this.bsModalService.show(AddNewAccountComponent);
     this.bsModalRef.content.event.subscribe(result => {
       if (result.response == 'OK') {
         this.accountList = result.data;
-        this.returnedAccountList = this.accountList.slice(0,10);
+
+        // This is to stay on the same page after addition
+        const startItem = (this.currentPage - 1) * this.itemsPerPage;
+        const endItem = this.currentPage * this.itemsPerPage;
+        this.returnedAccountList = this.accountList.slice(startItem,endItem);
       }
     });
-  }
-
-  runScript() {
-    // this.appservice.runScripts();
   }
 
   editAccount(accountId: number) {
@@ -53,6 +60,11 @@ export class AccountManagementPage implements OnInit {
         this.bsModalRef.content.event.subscribe(result => {
           if (result.response == 'OK') {
             this.accountList = result.data;
+
+            // This is to stay on the same page after addition
+            const startItem = (this.currentPage - 1) * this.itemsPerPage;
+            const endItem = this.currentPage * this.itemsPerPage;
+            this.returnedAccountList = this.accountList.slice(startItem,endItem);
           }
         });
 
@@ -70,7 +82,19 @@ export class AccountManagementPage implements OnInit {
       this.bsModalRef.content.event.subscribe(result => {
         if (result.response == 'OK') {
           this.accountList = result.data;
-          this.returnedAccountList = this.accountList.slice(0,10);
+
+          if(this.currentPage != 1){
+            const numOfItems = this.accountList.length;
+            const previousPageNumOfItems = (this.currentPage-1) * this.itemsPerPage;
+
+            if(numOfItems === previousPageNumOfItems){
+              this.currentPage -= 1;
+            }
+          }
+          
+          const startItem = (this.currentPage - 1) * this.itemsPerPage;
+          const endItem = this.currentPage * this.itemsPerPage;
+          this.returnedAccountList = this.accountList.slice(startItem,endItem);
         }
       });
 

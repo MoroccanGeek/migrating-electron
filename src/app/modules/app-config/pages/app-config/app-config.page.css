@@ -1,3 +1,20 @@
-#page-content-wrapper {
+/* #page-content-wrapper {
     width: 100vw;
+} */
+/*Add padding body*/
+.expander {
+    margin: 0 0 0 12rem;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.shrink {
+    margin: 0 0 0 5rem;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.page-content {
+    top: 5rem;
+    position: relative;
 }

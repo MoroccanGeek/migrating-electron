@@ -1,13 +1,11 @@
 <div class="d-flex" id="wrapper">
     <!-- Sidebar -->
-    <app-sidebar></app-sidebar>
+    <app-sidebar (isRotated)="doShrink($event)"></app-sidebar>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
-    <div id="page-content-wrapper">
-      <div class="container-fluid">
-        <router-outlet></router-outlet>
-      </div>
+    <div class="container page-content" [ngClass]="{'shrink' : shrink,'expander': !shrink}">
+      <router-outlet></router-outlet>
     </div>
     <!-- /#page-content-wrapper -->
   

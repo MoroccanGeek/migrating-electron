@@ -8,10 +8,17 @@ import { Router } from '@angular/router';
 })
 export class AppConfigPage implements OnInit {
 
+  expansion: any;
+  shrink: boolean = false;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.router);
+  }
+
+  doShrink(value: any){
+    this.shrink = value;
   }
 
 }

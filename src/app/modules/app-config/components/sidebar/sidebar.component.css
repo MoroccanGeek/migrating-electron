@@ -32,7 +32,7 @@ a {
   padding: 1.25rem .5rem 2rem;
   -webkit-transition: .5s;
   transition: .5s;
-  z-index: 100;
+  /* z-index: 100; */
 }
 
 .nav {
@@ -143,11 +143,4 @@ a {
 .active {
   background-color:#00D7FF;
   color:#12192C;
-}
-
-/*Add padding body*/
-.expander {
-  padding: 1rem 0 0 12rem;
-  -webkit-transition: .5s;
-  transition: .5s;
 }

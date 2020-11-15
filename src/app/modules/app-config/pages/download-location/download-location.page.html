@@ -10,9 +10,9 @@
             Download Data Folder
         </div>
         <div class="input-group mb-3 file-upload">
-            <input type="text" class="form-control" placeholder="Folder's directory" disabled>
+            <input type="text" class="form-control" placeholder={{download_folder}} disabled>
             <div class="input-group-append">
-                <button class="btn" type="button">
+                <button class="btn" type="button" (click)="getDownloadFolderLocation()">
                     <i class="fa fa-arrow-up"></i>
                 </button>
             </div>

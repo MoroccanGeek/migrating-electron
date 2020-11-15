@@ -6,3 +6,35 @@ div.page-title {
 div:first-of-type {
     border-radius: 12px;
 }
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #2590EB;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #FFFFFF, 50%, #2590EB 50%);
+    background-size: 100% 200%;
+    transition: all 0.5s;
+    color: #2590EB;
+    font-size: 25px;
+}
+
+button:hover {
+    background-position: 0 -100%;
+    color:#FFFFFF;
+}
+
+input{
+    border: 1px solid #2590EB;
+}

@@ -1,3 +1,8 @@
-.div {
-    height: 10000px;
+div.page-title {
+    justify-content: center;
+    margin: auto 0;
+}
+
+div:first-of-type {
+    border-radius: 12px;
 }

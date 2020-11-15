@@ -1,7 +1,3 @@
-/* #page-content-wrapper {
-    width: 100vw;
-} */
-/*Add padding body*/
 .expander {
     margin: 0 0 0 12rem;
     -webkit-transition: .5s;
@@ -15,6 +11,6 @@
 }
 
 .page-content {
-    top: 5rem;
+    top: 8rem;
     position: relative;
 }

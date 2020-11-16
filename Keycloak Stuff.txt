@@ -1,0 +1,117 @@
+1- Set the JAVA_HOME variable via the command line
+
+******************************************************************************************************************************************
+*If you would prefer to set the JAVA_HOME (or JRE_HOME) variable via the command line:							 *
+*																	 *
+*    1. Open Command Prompt (make sure you Run as administrator so you're able to add a system environment variable).			 *
+*																	 *
+*    2. Set the value of the environment variable to your JDK (or JRE) installation path as follows:					 *
+*																	 *
+*    	setx -m JAVA_HOME "C:\Progra~1\Java\jdk1.8.0_XX"										 *
+*																	 *
+*    If the path contains spaces, use the shortened path name.										 *
+*																	 *
+*    3. Restart Command Prompt to reload the environment variables then use the following command to check the it's been added correctly.*
+*																	 *
+*    echo %JAVA_HOME%															 *
+*																	 *
+*    You should see the path to your JDK (or JRE) installation.										 *
+******************************************************************************************************************************************
+
+
+
+2- Exporting Keycloak Realm and Users:
+
+***************************************************************************************************************************************************************************************
+*																						      *
+* standalone.bat -Dkeycloak.migration.realmName=Ecom-realm -Dkeycloak.migration.action=export -Dkeycloak.migration.provider=dir -Dkeycloak.migration.dir=C:\Users\Dronax\Desktop\Auth *
+*																						      *
+***************************************************************************************************************************************************************************************
+
+
+3- Run Keycloak on different port
+
+cd ../../keycloak-10.0.2/bin
+>>>>standalone.bat -Djboss.socket.binding.port-offset=1
+
+
+4- Upload Realm and Users config
+
+>>>>standalone.bat -Dkeycloak.profile.feature.upload_scripts=enabled
+
+
+5- Integrating Keycloak with MySQL
+Check these websites:
+	*	https://community.appian.com/support/w/kb/318/kb-1095-jbas013412-timeout-after-300-seconds-waiting-for-service-container-stability-error-thrown-during-jboss-startup
+	*	https://developer.jboss.org/thread/279672
+
+
+
+MySQL SHELL:
+============
+
+[1]	\sql
+
+[2]	\connect root@localhost
+
+[3]	CREATE DATABASE keycloak CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+[4]	GRANT ALL PRIVILEGES ON keycloak.* TO 'keycloak'@'%';
+
+
+
+***************************************************************************************************************************************************************************************
+***************************************************************************************************************************************************************************************
+***************************************************************************************************************************************************************************************
+
+Integrate Angular + Keycloak
+
+https://www.npmjs.com/package/keycloak-angular
+https://medium.com/@sairamkrish/keycloak-integration-part-2-integration-with-angular-frontend-f2716c696a28
+https://geeks18.com/?p=1397
+
+https://github.com/mauriciovigolo/keycloak-angular/issues/104
+
+Keycloak SPI:
+https://dev.to/adwaitthattey/building-an-event-listener-spi-plugin-for-keycloak-2044
+
+https://wjw465150.gitbooks.io/keycloak-documentation/
+
+https://github.com/MarcinMichalik/keycloak-events-rest
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

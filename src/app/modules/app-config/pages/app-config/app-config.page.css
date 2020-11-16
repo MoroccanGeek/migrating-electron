@@ -1,3 +1,8 @@
+.wrapper {
+    justify-content: center;
+    margin: auto 0;
+}
+
 .expander {
     margin: 0 0 0 12rem;
     -webkit-transition: .5s;
@@ -11,6 +16,6 @@
 }
 
 .page-content {
-    top: 8rem;
+    top: 1rem;
     position: relative;
 }

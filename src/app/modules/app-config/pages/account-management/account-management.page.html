@@ -33,7 +33,7 @@
                         <td>{{account.name}}</td>
                         <td>
                             <label class="switch">
-                                <input type="checkbox" (click)="pushNotification()" [checked]="account.in_use == 1">
+                                <input class="account_status" type="checkbox" (click)="updateAccountStatus(account.id,$event)" [checked]="account.in_use == 1">
                                 <span class="slider round"></span>
                             </label>
                         </td>

@@ -76,6 +76,30 @@ export class DatabaseService {
         return await accountRepo.findOne();
     }
 
+    async updateAccountStatusById(connection: Connection, account_id: number){
+        const accountRepo = connection.getRepository(Account);
+
+        let accountToUpdate = await accountRepo.findOne(account_id);
+
+        if(accountToUpdate.in_use == '1'){
+            accountToUpdate.in_use = '0';
+        }
+        else{
+            let accountToDeactivate = await accountRepo.findOne({in_use: '1'});
+
+            if(accountToDeactivate){
+                accountToDeactivate.in_use = '0';
+                await accountRepo.save(accountToDeactivate);
+            }
+            
+            accountToUpdate.in_use = '1';
+        }
+        
+        await accountRepo.save(accountToUpdate);
+
+        return true;
+    }
+
 // For API Keys CRUD
     async getApikeys(connection: Connection){
 

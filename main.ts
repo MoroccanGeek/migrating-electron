@@ -100,6 +100,10 @@ async function createWindow(): Promise<BrowserWindow> {
     return await db.accountExists(connection);
   });
 
+  ipcMain.handle('update-account-status', async (e, account_id: number)=> {
+    return await db.updateAccountStatusById(connection, account_id);
+  })
+
 // For API Keys CRUD
   ipcMain.handle('get-apikeys', async (e, args) => {
     return await db.getApikeys(connection);

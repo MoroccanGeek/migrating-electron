@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { Account } from '@assets/models/account.entity';
-import { AccountService } from '@core/services';
+import { AccountService, ElectronService } from '@core/services';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { AddNewAccountComponent } from '../../components/account-crud/add-new-account/add-new-account.component';
 import { DeleteAccountComponent } from '../../components/account-crud/delete-account/delete-account.component';
@@ -12,7 +12,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
   templateUrl: './account-management.page.html',
   styleUrls: ['./account-management.page.css']
 })
-export class AccountManagementPage implements OnInit {
+export class AccountManagementPage implements OnInit, AfterViewInit{
 
   accountList: Account[];
   returnedAccountList: Account[];
@@ -21,12 +21,23 @@ export class AccountManagementPage implements OnInit {
   currentPage = 1;
   push_notif=false;
 
-  constructor(private accountService: AccountService, private bsModalService: BsModalService) {}
+  constructor(
+    private electronService: ElectronService,
+    private accountService: AccountService, 
+    private bsModalService: BsModalService,
+    private elem: ElementRef) {}
 
   async ngOnInit() {
     this.accountList = await this.accountService.getAccounts().toPromise<Account[]>();
 
     this.returnedAccountList = this.accountList.slice(0,this.itemsPerPage);
+  }
+
+  ngAfterViewInit(){
+    // Get all DOM elements with class == '.navlink'
+    const elements = this.elem.nativeElement.querySelectorAll('.account_status');
+
+    console.log(elements);
   }
 
   addNewAccount(){
@@ -103,14 +114,31 @@ export class AccountManagementPage implements OnInit {
     this.returnedAccountList = this.accountList.slice(startItem, endItem);
   }
 
+  async updateAccountStatus(account_id: number, checkedElement) {
+    const checkedElement_Value = checkedElement.srcElement.checked;
+
+    const result = await this.electronService.ipcRenderer.invoke('update-account-status', account_id);
+
+    if(result) {
+      // Get all DOM elements with class == '.navlink'
+      const elements = this.elem.nativeElement.querySelectorAll('.account_status');
+
+      // Uncheck all check-boxes
+      elements.forEach( e => {
+        e.checked = false;
+      });
+
+      checkedElement.srcElement.checked = checkedElement_Value;
+      this.pushNotification();
+    }
+  }
+
   pushNotification() {
     this.push_notif = true;
-    console.log('calling pushNotif: ',this.push_notif);
   }
 
   closeNotification() {
     this.push_notif = false;
-    console.log('calling closeNotif: ',this.push_notif);
   }
 
 

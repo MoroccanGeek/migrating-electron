@@ -28,6 +28,7 @@ import { DeleteProjectComponent } from './components/projects-crud/delete-projec
 
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { AlertModule } from 'ngx-bootstrap/alert';
 import { DownloadLocationPage } from './pages/download-location/download-location.page';
 
 @NgModule({
@@ -58,7 +59,8 @@ import { DownloadLocationPage } from './pages/download-location/download-locatio
     AppRoutingModule,
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [BsModalService],
 })

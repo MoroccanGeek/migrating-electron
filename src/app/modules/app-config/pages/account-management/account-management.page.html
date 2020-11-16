@@ -1,3 +1,12 @@
+<alert 
+    *ngIf="push_notif"
+    [dismissOnTimeout]="5000"
+    (onClose)="closeNotification()"
+    type="md-local">
+    Account has been Activated successfully <i class='bx bx-user-check nav__icon' ></i>
+</alert>
+
+
 <div class="container-xl">
     <div class="table-responsive">
         <div class="table-wrapper">
@@ -23,7 +32,7 @@
                     <tr *ngFor="let account of returnedAccountList">
                         <td>{{account.id}}</td>
                         <td>{{account.name}}</td>
-                        <td>{{account.in_use}}</td>
+                        <td (click)="pushNotification()">{{account.in_use}}</td>
                         <td>
                             <span (click)="editAccount(account.id)" class="settings" tooltip="Settings"><i class="material-icons">&#xE8B8;</i></span>
                             <span (click)="deleteAccount(account.id)" class="delete" tooltip="Delete"><i class="material-icons">&#xE5C9;</i></span>

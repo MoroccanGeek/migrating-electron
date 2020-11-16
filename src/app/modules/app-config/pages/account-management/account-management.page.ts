@@ -19,6 +19,7 @@ export class AccountManagementPage implements OnInit {
   bsModalRef: BsModalRef;
   itemsPerPage = 10;
   currentPage = 1;
+  push_notif=false;
 
   constructor(private accountService: AccountService, private bsModalService: BsModalService) {}
 
@@ -101,5 +102,16 @@ export class AccountManagementPage implements OnInit {
 
     this.returnedAccountList = this.accountList.slice(startItem, endItem);
   }
+
+  pushNotification() {
+    this.push_notif = true;
+    console.log('calling pushNotif: ',this.push_notif);
+  }
+
+  closeNotification() {
+    this.push_notif = false;
+    console.log('calling closeNotif: ',this.push_notif);
+  }
+
 
 }

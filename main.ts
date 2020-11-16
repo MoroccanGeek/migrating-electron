@@ -4,7 +4,6 @@ import { Project } from './src/assets/models/project.entity';
 import { app, BrowserWindow, ipcMain, screen, dialog } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
-import * as os from 'os';
 import { createConnection } from 'typeorm';
 
 import * as child from 'child_process';
@@ -177,7 +176,7 @@ async function createWindow(): Promise<BrowserWindow> {
 
     const res = dialog.showOpenDialogSync(win, {
       'title': 'Download folder path',
-      'defaultPath': app.getPath('downloads'),
+      'defaultPath': app.getPath('desktop'),
       'properties': ['openDirectory'],
     });
 
